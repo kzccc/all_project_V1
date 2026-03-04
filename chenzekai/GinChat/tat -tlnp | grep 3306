@@ -1,0 +1,13 @@
+[0;1;32m●[0m mysqld.service - MySQL 8.0 database server
+   Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)
+   Active: [0;1;32mactive (running)[0m since Wed 2025-11-26 17:53:40 CST; 21h ago
+ Main PID: 407297 (mysqld)
+   Status: "Server is operational"
+    Tasks: 38 (limit: 1620994)
+   Memory: 493.5M
+   CGroup: /system.slice/mysqld.service
+           └─407297 /usr/libexec/mysqld --basedir=/usr
+
+Nov 26 17:53:35 iZwz9b7sxvjqfc6u2hnroeZ systemd[1]: Starting MySQL 8.0 database server...
+Nov 26 17:53:35 iZwz9b7sxvjqfc6u2hnroeZ mysql-prepare-db-dir[407198]: Initializing MySQL database
+Nov 26 17:53:40 iZwz9b7sxvjqfc6u2hnroeZ systemd[1]: Started MySQL 8.0 database server.

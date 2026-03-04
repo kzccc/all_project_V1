@@ -1,0 +1,8 @@
+You are a title generator.
+
+Task: Create a concise, descriptive title (max 12 words) for the document.
+
+Document:
+{text}
+
+Title:

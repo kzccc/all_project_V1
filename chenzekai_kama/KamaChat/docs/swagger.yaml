@@ -1,0 +1,1270 @@
+basePath: /
+definitions:
+  request.AbleUsersRequest:
+    properties:
+      is_admin:
+        type: integer
+      uuid_list:
+        items:
+          type: string
+        type: array
+    type: object
+  request.AddGroupListRequest:
+    properties:
+      group_id:
+        type: string
+    type: object
+  request.ApplyContactRequest:
+    properties:
+      contact_id:
+        type: string
+      message:
+        type: string
+      owner_id:
+        type: string
+    type: object
+  request.BlackApplyRequest:
+    properties:
+      contact_id:
+        type: string
+      owner_id:
+        type: string
+    type: object
+  request.BlackContactRequest:
+    properties:
+      contact_id:
+        type: string
+      owner_id:
+        type: string
+    type: object
+  request.CheckGroupAddModeRequest:
+    properties:
+      group_id:
+        type: string
+    type: object
+  request.CreateGroupRequest:
+    properties:
+      add_mode:
+        type: integer
+      avatar:
+        type: string
+      name:
+        type: string
+      notice:
+        type: string
+      owner_id:
+        type: string
+    type: object
+  request.CreateSessionRequest:
+    properties:
+      receive_id:
+        type: string
+      send_id:
+        type: string
+    type: object
+  request.DeleteContactRequest:
+    properties:
+      contact_id:
+        type: string
+      owner_id:
+        type: string
+    type: object
+  request.DeleteGroupsRequest:
+    properties:
+      uuid_list:
+        items:
+          type: string
+        type: array
+    type: object
+  request.DeleteSessionRequest:
+    properties:
+      owner_id:
+        type: string
+      session_id:
+        type: string
+    type: object
+  request.DismissGroupRequest:
+    properties:
+      group_id:
+        type: string
+      owner_id:
+        type: string
+    type: object
+  request.EnterGroupDirectlyRequest:
+    properties:
+      contact_id:
+        type: string
+      owner_id:
+        type: string
+    type: object
+  request.GetContactInfoRequest:
+    properties:
+      contact_id:
+        type: string
+    type: object
+  request.GetCurContactListInChatRoomRequest:
+    properties:
+      contact_id:
+        type: string
+      owner_id:
+        type: string
+    type: object
+  request.GetGroupInfoRequest:
+    properties:
+      group_id:
+        type: string
+    type: object
+  request.GetGroupMemberListRequest:
+    properties:
+      group_id:
+        type: string
+    type: object
+  request.GetGroupMessageListRequest:
+    properties:
+      group_id:
+        type: string
+    type: object
+  request.GetMessageListRequest:
+    properties:
+      user_one_id:
+        type: string
+      user_two_id:
+        type: string
+    type: object
+  request.GetUserInfoListRequest:
+    properties:
+      owner_id:
+        type: string
+    type: object
+  request.GetUserInfoRequest:
+    properties:
+      uuid:
+        type: string
+    type: object
+  request.LeaveGroupRequest:
+    properties:
+      group_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  request.LoginRequest:
+    properties:
+      password:
+        type: string
+      telephone:
+        type: string
+    type: object
+  request.OpenSessionRequest:
+    properties:
+      receive_id:
+        type: string
+      send_id:
+        type: string
+    type: object
+  request.OwnlistRequest:
+    properties:
+      owner_id:
+        type: string
+    type: object
+  request.PassContactApplyRequest:
+    properties:
+      contact_id:
+        type: string
+      owner_id:
+        type: string
+    type: object
+  request.RegisterRequest:
+    properties:
+      nickname:
+        type: string
+      password:
+        type: string
+      sms_code:
+        type: string
+      telephone:
+        type: string
+    type: object
+  request.RemoveGroupMembersRequest:
+    properties:
+      group_id:
+        type: string
+      owner_id:
+        type: string
+      uuid_list:
+        items:
+          type: string
+        type: array
+    type: object
+  request.SendSmsCodeRequest:
+    properties:
+      telephone:
+        type: string
+    type: object
+  request.SetGroupsStatusRequest:
+    properties:
+      status:
+        type: integer
+      uuid_list:
+        items:
+          type: string
+        type: array
+    type: object
+  request.SmsLoginRequest:
+    properties:
+      sms_code:
+        type: string
+      telephone:
+        type: string
+    type: object
+  request.UpdateGroupInfoRequest:
+    properties:
+      add_mode:
+        type: integer
+      avatar:
+        type: string
+      name:
+        type: string
+      notice:
+        type: string
+      owner_id:
+        type: string
+      uuid:
+        type: string
+    type: object
+  request.UpdateUserInfoRequest:
+    properties:
+      avatar:
+        type: string
+      birthday:
+        type: string
+      email:
+        type: string
+      nickname:
+        type: string
+      signature:
+        type: string
+      uuid:
+        type: string
+    type: object
+  request.WsLogoutRequest:
+    properties:
+      owner_id:
+        type: string
+    type: object
+  v1.SwaggerResponse:
+    properties:
+      code:
+        example: 200
+        type: integer
+      data: {}
+      message:
+        example: ok
+        type: string
+    type: object
+info:
+  contact: {}
+  description: KamaChat server API documentation.
+  title: KamaChat API
+  version: "1.0"
+paths:
+  /chatroom/getCurContactListInChatRoom:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 获取聊天室联系人列表请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetCurContactListInChatRoomRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取当前聊天室联系人列表
+      tags:
+      - chatroom
+  /contact/applyContact:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 申请联系人请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.ApplyContactRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 申请添加联系人
+      tags:
+      - contact
+  /contact/blackApply:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 拉黑申请请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.BlackApplyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 拉黑申请
+      tags:
+      - contact
+  /contact/blackContact:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 拉黑联系人请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.BlackContactRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 拉黑联系人
+      tags:
+      - contact
+  /contact/cancelBlackContact:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 解除拉黑联系人请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.BlackContactRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 解除拉黑联系人
+      tags:
+      - contact
+  /contact/deleteContact:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 删除联系人请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.DeleteContactRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 删除联系人
+      tags:
+      - contact
+  /contact/getAddGroupList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 群聊ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.AddGroupListRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取新的群聊申请列表
+      tags:
+      - contact
+  /contact/getContactInfo:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 联系人ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetContactInfoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取联系人信息
+      tags:
+      - contact
+  /contact/getNewContactList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.OwnlistRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取新的联系人申请列表
+      tags:
+      - contact
+  /contact/getUserList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.OwnlistRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取联系人列表
+      tags:
+      - contact
+  /contact/loadMyJoinedGroup:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.OwnlistRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取我加入的群聊
+      tags:
+      - contact
+  /contact/passContactApply:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 通过联系人申请请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.PassContactApplyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 通过联系人申请
+      tags:
+      - contact
+  /contact/refuseContactApply:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 拒绝联系人申请请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.PassContactApplyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 拒绝联系人申请
+      tags:
+      - contact
+  /group/checkGroupAddMode:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 群聊ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.CheckGroupAddModeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 检查群聊加群方式
+      tags:
+      - group
+  /group/createGroup:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 创建群聊请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateGroupRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 创建群聊
+      tags:
+      - group
+  /group/deleteGroups:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 群聊ID列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.DeleteGroupsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 删除群聊
+      tags:
+      - group
+  /group/dismissGroup:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 解散群聊请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.DismissGroupRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 解散群聊
+      tags:
+      - group
+  /group/enterGroupDirectly:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 直接进群请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.EnterGroupDirectlyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 直接进群
+      tags:
+      - group
+  /group/getGroupInfo:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 群聊ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetGroupInfoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取群聊详情
+      tags:
+      - group
+  /group/getGroupInfoList:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取群聊列表
+      tags:
+      - group
+  /group/getGroupMemberList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 群聊ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetGroupMemberListRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取群聊成员列表
+      tags:
+      - group
+  /group/leaveGroup:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 退群请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.LeaveGroupRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 退群
+      tags:
+      - group
+  /group/loadMyGroup:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.OwnlistRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取我创建的群聊
+      tags:
+      - group
+  /group/removeGroupMembers:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 移除群聊成员请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.RemoveGroupMembersRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 移除群聊成员
+      tags:
+      - group
+  /group/setGroupsStatus:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 群聊状态请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.SetGroupsStatusRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 设置群聊状态
+      tags:
+      - group
+  /group/updateGroupInfo:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 更新群聊信息请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdateGroupInfoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 更新群聊信息
+      tags:
+      - group
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 登录信息
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 用户登录
+      tags:
+      - user
+  /message/getGroupMessageList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 获取群聊消息记录请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetGroupMessageListRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取群聊消息记录
+      tags:
+      - message
+  /message/getMessageList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 获取聊天记录请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetMessageListRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取聊天记录
+      tags:
+      - message
+  /message/uploadAvatar:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: 头像文件
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 上传头像
+      tags:
+      - message
+  /message/uploadFile:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: 文件
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 上传文件
+      tags:
+      - message
+  /register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 注册信息
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 用户注册
+      tags:
+      - user
+  /session/checkOpenSessionAllowed:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 会话检查请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateSessionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 检查是否可以打开会话
+      tags:
+      - session
+  /session/deleteSession:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 删除会话请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.DeleteSessionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 删除会话
+      tags:
+      - session
+  /session/getGroupSessionList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.OwnlistRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取群聊会话列表
+      tags:
+      - session
+  /session/getUserSessionList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.OwnlistRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取用户会话列表
+      tags:
+      - session
+  /session/openSession:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 打开会话请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.OpenSessionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 打开会话
+      tags:
+      - session
+  /user/ableUsers:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户ID列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.AbleUsersRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 启用用户
+      tags:
+      - user
+  /user/deleteUsers:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户ID列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.AbleUsersRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 删除用户
+      tags:
+      - user
+  /user/disableUsers:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户ID列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.AbleUsersRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 禁用用户
+      tags:
+      - user
+  /user/getUserInfo:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetUserInfoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取用户信息
+      tags:
+      - user
+  /user/getUserInfoList:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 查询用户列表请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetUserInfoListRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 获取用户列表
+      tags:
+      - user
+  /user/sendSmsCode:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 手机号
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.SendSmsCodeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 发送短信验证码
+      tags:
+      - user
+  /user/setAdmin:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 用户ID列表
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.AbleUsersRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 设置管理员
+      tags:
+      - user
+  /user/smsLogin:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 验证码登录信息
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.SmsLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 验证码登录
+      tags:
+      - user
+  /user/updateUserInfo:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 修改用户信息请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.UpdateUserInfoRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: 修改用户信息
+      tags:
+      - user
+  /user/wsLogout:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 登出请求
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/request.WsLogoutRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: WebSocket 登出
+      tags:
+      - ws
+  /wss:
+    get:
+      parameters:
+      - description: 客户端ID
+        in: query
+        name: client_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.SwaggerResponse'
+      summary: WebSocket 登录
+      tags:
+      - ws
+schemes:
+- https
+- http
+swagger: "2.0"

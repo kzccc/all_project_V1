@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>琥珀文档引擎</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
+
+      :root {
+        color-scheme: light;
+        --bg: #f6f3f8;
+        --bg-deep: #e9e5f2;
+        --ink: #151219;
+        --muted: #5e5868;
+        --accent: #ff7b5c;
+        --accent-2: #4bb6b1;
+        --accent-3: #ffc56b;
+        --glass: rgba(255, 255, 255, 0.72);
+        --glass-strong: rgba(255, 255, 255, 0.86);
+        --glass-border: rgba(255, 255, 255, 0.5);
+        --shadow: 0 24px 60px rgba(25, 22, 40, 0.12);
+        --shadow-soft: 0 12px 30px rgba(25, 22, 40, 0.08);
+        --radius-lg: 28px;
+        --radius-md: 18px;
+        --radius-sm: 12px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at top left, #ffffff 0%, #f5f0ff 40%, #efe8ff 100%);
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: auto;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+        filter: blur(20px);
+        z-index: 0;
+      }
+
+      body::before {
+        top: -60px;
+        right: 8%;
+      }
+
+      body::after {
+        bottom: -120px;
+        left: 4%;
+      }
+
+      .ambient {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .orb {
+        position: absolute;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        filter: blur(6px);
+        opacity: 0.65;
+      }
+
+      .orb.one {
+        background: radial-gradient(circle, #ffe2c9 0%, rgba(255, 226, 201, 0) 70%);
+        top: 120px;
+        left: 6%;
+      }
+
+      .orb.two {
+        background: radial-gradient(circle, #cbefff 0%, rgba(203, 239, 255, 0) 70%);
+        top: 420px;
+        right: 8%;
+      }
+
+      .orb.three {
+        background: radial-gradient(circle, #d9f6e9 0%, rgba(217, 246, 233, 0) 70%);
+        bottom: 120px;
+        left: 30%;
+      }
+
+      .app {
+        position: relative;
+        z-index: 1;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 28px 20px 48px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-lg);
+        padding: 18px 22px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(20px);
+      }
+
+      .brand h1 {
+        font-family: "DM Serif Display", serif;
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        margin: 0;
+        letter-spacing: 0.02em;
+      }
+
+      .brand p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .nav-btn {
+        border: 1px solid transparent;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 999px;
+        padding: 8px 16px;
+        font-weight: 600;
+        color: var(--ink);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .nav-btn.active {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .nav-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .status-pill {
+        font-size: 0.85rem;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.65);
+        padding: 6px 12px;
+        border-radius: 999px;
+      }
+
+      main {
+        margin-top: 26px;
+      }
+
+      .panel {
+        display: none;
+        animation: fadeUp 0.4s ease;
+      }
+
+      .panel.active {
+        display: block;
+      }
+
+      .panel-header {
+        margin-bottom: 18px;
+      }
+
+      .panel-header h2 {
+        margin: 0 0 6px;
+        font-size: 1.4rem;
+      }
+
+      .panel-header p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .card {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-md);
+        padding: 18px 18px 20px;
+        box-shadow: var(--shadow-soft);
+        backdrop-filter: blur(18px);
+      }
+
+      .card h3 {
+        margin: 0 0 12px;
+        font-size: 1.1rem;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+
+      label {
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+
+      input,
+      textarea,
+      select {
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        border-radius: var(--radius-sm);
+        padding: 10px 12px;
+        font-size: 0.92rem;
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--ink);
+        outline: none;
+        transition: border 0.2s ease;
+      }
+
+      input:focus,
+      textarea:focus,
+      select:focus {
+        border-color: rgba(255, 123, 92, 0.6);
+      }
+
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      .row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .row.mini {
+        gap: 8px;
+      }
+
+      button {
+        border: none;
+        border-radius: 999px;
+        padding: 9px 18px;
+        font-weight: 600;
+        background: var(--accent);
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: var(--shadow-soft);
+      }
+
+      button.secondary {
+        background: var(--accent-2);
+      }
+
+      button.ghost {
+        background: rgba(255, 255, 255, 0.7);
+        color: var(--ink);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: none;
+      }
+
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+      }
+
+      .status {
+        margin-top: 8px;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+
+      .dock {
+        margin-top: 18px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .dock-btn {
+        padding: 10px 16px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        color: var(--ink);
+      }
+
+      .draft-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .draft-card {
+        padding: 12px;
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        animation: fadeUp 0.3s ease;
+      }
+
+      .draft-meta {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .chip {
+        display: inline-flex;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(255, 197, 107, 0.3);
+        font-size: 0.75rem;
+        color: #6b4300;
+      }
+
+      .path-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .hint {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      .tree {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .tree-node {
+        padding: 8px 10px;
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.55);
+      }
+
+      .tree-node .node-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .tree-node .node-title {
+        font-weight: 600;
+      }
+
+      .tree-node .node-meta {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      .tree-children {
+        margin-left: 14px;
+        margin-top: 6px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .doc-pill {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        color: var(--muted);
+      }
+
+      .doc-overview {
+        display: grid;
+        gap: 10px;
+      }
+
+      .doc-item {
+        padding: 10px 12px;
+        border-radius: var(--radius-sm);
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+      }
+
+      .doc-item h4 {
+        margin: 0 0 4px;
+        font-size: 0.95rem;
+      }
+
+      .result {
+        white-space: pre-wrap;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        padding: 12px;
+        min-height: 120px;
+        font-family: "DM Serif Display", serif;
+      }
+
+      .references {
+        margin-top: 12px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        padding: 10px 12px;
+      }
+
+      .references h4 {
+        margin: 0 0 6px;
+        font-size: 0.9rem;
+      }
+
+      .selected-list {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(12, 10, 20, 0.45);
+        z-index: 10;
+        padding: 20px;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: var(--glass-strong);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        width: min(720px, 100%);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: var(--shadow);
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .topbar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .nav {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ambient">
+      <span class="orb one"></span>
+      <span class="orb two"></span>
+      <span class="orb three"></span>
+    </div>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <h1>琥珀文档引擎</h1>
+          <p>批量上传 · 标题主题确认 · 树状归档 · 问答与报告</p>
+        </div>
+        <nav class="nav">
+          <button class="nav-btn active" data-panel="upload">上传</button>
+          <button class="nav-btn" data-panel="library">文档库</button>
+          <button class="nav-btn" data-panel="qa">问答 / 报告</button>
+        </nav>
+        <div class="status-pill" id="status">状态：待命</div>
+      </header>
+
+      <main>
+        <section class="panel active" id="panel-upload">
+          <div class="panel-header">
+            <h2>上传与确认</h2>
+            <p>支持批量上传 ppt/txt/excel/word/pdf，生成标题与主题后可手动修改。</p>
+          </div>
+          <div class="grid">
+            <section class="card">
+              <h3>批量上传</h3>
+              <div class="field">
+                <label>选择文件</label>
+                <input
+                  id="fileInput"
+                  type="file"
+                  multiple
+                  accept=".ppt,.pptx,.txt,.xls,.xlsx,.doc,.docx,.pdf"
+                />
+              </div>
+              <div class="row">
+                <button id="uploadBtn">上传并生成标题/主题</button>
+              </div>
+              <div class="status" id="uploadStatus"></div>
+            </section>
+
+            <section class="card">
+              <h3>本批次草稿</h3>
+              <div class="draft-list" id="draftList">等待上传。</div>
+              <div class="row">
+                <button class="secondary" id="confirmAllBtn">确认并入库</button>
+                <button class="ghost" id="rebuildBtn">重构文档结构</button>
+              </div>
+              <div class="status" id="confirmStatus"></div>
+            </section>
+          </div>
+          <div class="dock">
+            <button class="dock-btn" data-panel="library">打开文档结构</button>
+            <button class="dock-btn" data-panel="qa">打开问答与报告</button>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-library">
+          <div class="panel-header">
+            <h2>文档库结构</h2>
+            <p>主干由人工定义，系统建议基于相似度自动扩展，可随时重构。</p>
+          </div>
+          <div class="grid">
+            <section class="card">
+              <h3>树状结构</h3>
+              <div class="tree" id="treeView">加载中...</div>
+            </section>
+            <section class="card">
+              <h3>入库概览</h3>
+              <div class="doc-overview" id="docOverview">暂无文档。</div>
+            </section>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-qa">
+          <div class="panel-header">
+            <h2>问答与报告</h2>
+            <p>根据文档结构选择文件夹或文档，可多选后生成报告或回答问题。</p>
+          </div>
+          <div class="grid">
+            <section class="card">
+              <h3>选择文档/文件夹</h3>
+              <div class="row mini">
+                <span class="doc-pill" id="selectionCount">已选 0 项</span>
+                <button class="ghost" id="clearSelection">清空选择</button>
+              </div>
+              <div class="tree" id="qaTree">加载中...</div>
+              <div class="selected-list" id="selectedDocs"></div>
+            </section>
+
+            <section class="card">
+              <h3>报告与问答</h3>
+              <div class="row">
+                <button id="reportBtn">一键生成报告</button>
+              </div>
+              <div class="field">
+                <label>提问</label>
+                <input id="queryInput" placeholder="例如：总结这批资料的核心结论" />
+              </div>
+              <div class="row">
+                <button id="askBtn">提交问题</button>
+              </div>
+              <div class="status" id="askStatus"></div>
+              <div class="result" id="answerBox">等待生成...</div>
+              <div class="references">
+                <h4>参考文档</h4>
+                <div id="referenceList">暂无</div>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal" id="restructureModal">
+      <div class="modal-content">
+        <h3>重构预览</h3>
+        <p class="hint">预览仅基于本批次内容生成，确认后会更新树结构。</p>
+        <div class="tree" id="restructureTree"></div>
+        <div class="row" style="margin-top: 12px;">
+          <button class="secondary" id="applyRestructureBtn">确认更新结构</button>
+          <button class="ghost" id="cancelRestructureBtn">取消</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const statusEl = document.getElementById("status");
+      const uploadStatus = document.getElementById("uploadStatus");
+      const confirmStatus = document.getElementById("confirmStatus");
+      const askStatus = document.getElementById("askStatus");
+      const docOverview = document.getElementById("docOverview");
+      const treeView = document.getElementById("treeView");
+      const qaTree = document.getElementById("qaTree");
+      const answerBox = document.getElementById("answerBox");
+      const referenceList = document.getElementById("referenceList");
+      const selectionCount = document.getElementById("selectionCount");
+      const selectedDocs = document.getElementById("selectedDocs");
+      const draftList = document.getElementById("draftList");
+      const restructureModal = document.getElementById("restructureModal");
+      const restructureTree = document.getElementById("restructureTree");
+      const applyRestructureBtn = document.getElementById("applyRestructureBtn");
+
+      const state = {
+        taxonomy: { nodes: [], assignments: {}, version: 1 },
+        documents: [],
+        drafts: [],
+        restructureProposal: null,
+      };
+
+      const setStatus = (el, text) => {
+        el.textContent = text;
+      };
+
+      const stripThink = (text) => {
+        if (!text) return "";
+        return text.replace(/<think>[\s\S]*?<\/think>/g, "").trim();
+      };
+
+      const prettyFilename = (path) => {
+        if (!path) return "";
+        const base = path.split("/").pop() || path;
+        const parts = base.split("_");
+        return parts.length > 1 ? parts.slice(1).join("_") : base;
+      };
+
+      const parseLabels = (value) =>
+        value
+          .split(",")
+          .map((label) => label.trim())
+          .filter(Boolean);
+
+      const buildNodeMap = (nodes) => {
+        const map = new Map();
+        nodes.forEach((node) => map.set(node.node_id, { ...node, children: [] }));
+        map.forEach((node) => {
+          if (node.parent_id && map.has(node.parent_id)) {
+            map.get(node.parent_id).children.push(node);
+          }
+        });
+        return map;
+      };
+
+      const formatPath = (nodes, nodeId) => {
+        const map = buildNodeMap(nodes);
+        let current = map.get(nodeId);
+        const parts = [];
+        while (current) {
+          parts.push(current.name);
+          if (!current.parent_id) break;
+          current = map.get(current.parent_id);
+        }
+        return parts.length ? parts.reverse().join(" / ") : "根目录";
+      };
+
+      const docsByNode = () => {
+        const mapping = {};
+        state.documents.forEach((doc) => {
+          const nodeId = state.taxonomy.assignments[doc.doc_id];
+          if (!nodeId) return;
+          if (!mapping[nodeId]) mapping[nodeId] = [];
+          mapping[nodeId].push(doc);
+        });
+        return mapping;
+      };
+
+      const renderTree = (container, nodes, options = {}) => {
+        if (!nodes.length) {
+          container.textContent = "暂无结构。";
+          return;
+        }
+        const map = buildNodeMap(nodes);
+        const root = map.get("root") || [...map.values()][0];
+        const docMapping = docsByNode();
+        container.innerHTML = "";
+
+        const renderNode = (node) => {
+          const wrapper = document.createElement("div");
+          wrapper.className = "tree-node";
+          const nodeRow = document.createElement("div");
+          nodeRow.className = "node-row";
+          const left = document.createElement("div");
+          left.style.display = "flex";
+          left.style.gap = "8px";
+          left.style.alignItems = "center";
+
+          if (options.selectable) {
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.dataset.nodeId = node.node_id;
+            checkbox.className = "node-checkbox";
+            checkbox.addEventListener("change", syncSelection);
+            left.appendChild(checkbox);
+          }
+
+          const title = document.createElement("div");
+          title.className = "node-title";
+          title.textContent = node.name;
+          left.appendChild(title);
+
+          const meta = document.createElement("div");
+          meta.className = "node-meta";
+          const count = (docMapping[node.node_id] || []).length;
+          meta.textContent = `${count} 篇`;
+
+          nodeRow.appendChild(left);
+          nodeRow.appendChild(meta);
+          wrapper.appendChild(nodeRow);
+
+          const docs = docMapping[node.node_id] || [];
+          if (docs.length) {
+            const docWrap = document.createElement("div");
+            docWrap.className = "tree-children";
+            docs.forEach((doc) => {
+              const docRow = document.createElement("div");
+              docRow.style.display = "flex";
+              docRow.style.gap = "8px";
+              docRow.style.alignItems = "center";
+              if (options.selectable) {
+                const docCheck = document.createElement("input");
+                docCheck.type = "checkbox";
+                docCheck.dataset.docId = doc.doc_id;
+                docCheck.className = "doc-checkbox";
+                docCheck.addEventListener("change", syncSelection);
+                docRow.appendChild(docCheck);
+              }
+              const docLabel = document.createElement("span");
+              docLabel.className = "doc-pill";
+              docLabel.textContent = doc.title || doc.doc_id;
+              docRow.appendChild(docLabel);
+              docWrap.appendChild(docRow);
+            });
+            wrapper.appendChild(docWrap);
+          }
+
+          if (node.children && node.children.length) {
+            const childrenWrap = document.createElement("div");
+            childrenWrap.className = "tree-children";
+            node.children
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .forEach((child) => childrenWrap.appendChild(renderNode(child)));
+            wrapper.appendChild(childrenWrap);
+          }
+
+          return wrapper;
+        };
+
+        container.appendChild(renderNode(root));
+      };
+
+      const renderOverview = () => {
+        if (!state.documents.length) {
+          docOverview.textContent = "暂无文档。";
+          return;
+        }
+        docOverview.innerHTML = "";
+        const nodeMap = new Map(state.taxonomy.nodes.map((node) => [node.node_id, node]));
+        state.documents.forEach((doc) => {
+          const item = document.createElement("div");
+          item.className = "doc-item";
+          const title = doc.title || doc.doc_id;
+          const nodeId = state.taxonomy.assignments[doc.doc_id];
+          const path = nodeId ? formatPath(state.taxonomy.nodes, nodeId) : "未分配";
+          item.innerHTML = `
+            <h4>${title}</h4>
+            <div class="hint">路径：${path}</div>
+            <div class="hint">主题：${(doc.labels || []).join(" · ") || "-"}</div>
+          `;
+          docOverview.appendChild(item);
+        });
+      };
+
+      const renderDrafts = () => {
+        if (!state.drafts.length) {
+          draftList.textContent = "等待上传。";
+          return;
+        }
+        draftList.innerHTML = "";
+        const nodeOptions = state.taxonomy.nodes
+          .map((node) => ({
+            id: node.node_id,
+            label: formatPath(state.taxonomy.nodes, node.node_id),
+          }))
+          .sort((a, b) => a.label.localeCompare(b.label));
+
+        state.drafts.forEach((draft) => {
+          const card = document.createElement("div");
+          card.className = "draft-card";
+          card.dataset.draftId = draft.draft_id;
+          card.dataset.docId = draft.doc_id;
+          const fileName = prettyFilename(draft.source_path) || draft.doc_id;
+          const suggestion = draft.suggestion;
+          const recommendedPath = suggestion ? suggestion.recommended_path : "待推荐";
+          const labelsValue = (draft.labels || []).join(", ");
+
+          const meta = document.createElement("div");
+          meta.className = "draft-meta";
+          const chip = document.createElement("span");
+          chip.className = "chip";
+          chip.textContent = fileName;
+          const metaHint = document.createElement("span");
+          metaHint.className = "hint";
+          metaHint.textContent = `doc_id: ${draft.doc_id}`;
+          meta.appendChild(chip);
+          meta.appendChild(metaHint);
+          card.appendChild(meta);
+
+          const titleField = document.createElement("div");
+          titleField.className = "field";
+          const titleLabel = document.createElement("label");
+          titleLabel.textContent = "标题";
+          const titleInput = document.createElement("input");
+          titleInput.className = "draft-title";
+          titleInput.value = draft.title || "";
+          titleField.appendChild(titleLabel);
+          titleField.appendChild(titleInput);
+          card.appendChild(titleField);
+
+          const labelField = document.createElement("div");
+          labelField.className = "field";
+          const labelLabel = document.createElement("label");
+          labelLabel.textContent = "主题（逗号分隔）";
+          const labelInput = document.createElement("input");
+          labelInput.className = "draft-labels";
+          labelInput.value = labelsValue;
+          labelField.appendChild(labelLabel);
+          labelField.appendChild(labelInput);
+          card.appendChild(labelField);
+
+          const pathField = document.createElement("div");
+          pathField.className = "field";
+          const pathLabel = document.createElement("label");
+          pathLabel.textContent = "存放路径";
+          const pathRow = document.createElement("div");
+          pathRow.className = "path-row";
+          const select = document.createElement("select");
+          select.className = "draft-node";
+          const newInput = document.createElement("input");
+          newInput.className = "draft-new-node";
+          newInput.placeholder = "新节点名称";
+          newInput.style.display = "none";
+          pathRow.appendChild(select);
+          pathRow.appendChild(newInput);
+          const pathHint = document.createElement("div");
+          pathHint.className = "hint";
+          pathHint.textContent = `推荐路径：${recommendedPath}`;
+          pathField.appendChild(pathLabel);
+          pathField.appendChild(pathRow);
+          pathField.appendChild(pathHint);
+          card.appendChild(pathField);
+
+          nodeOptions.forEach((option) => {
+            const opt = document.createElement("option");
+            opt.value = option.id;
+            opt.textContent = option.label;
+            select.appendChild(opt);
+          });
+
+          if (draft.suggestion?.suggested_new) {
+            const opt = document.createElement("option");
+            opt.value = "new";
+            opt.textContent = `新建：${draft.suggestion.suggested_new.path}`;
+            select.appendChild(opt);
+          }
+
+          select.value = draft.suggestion?.recommended_node_id || "root";
+          select.addEventListener("change", () => {
+            if (select.value === "new") {
+              newInput.style.display = "block";
+              newInput.value = draft.suggestion?.suggested_new?.path || "";
+            } else {
+              newInput.style.display = "none";
+            }
+          });
+
+          draftList.appendChild(card);
+        });
+      };
+
+      const updateSelectionSummary = (docIds) => {
+        selectionCount.textContent = `已选 ${docIds.length} 项`;
+        selectedDocs.innerHTML = "";
+        docIds.forEach((docId) => {
+          const doc = state.documents.find((item) => item.doc_id === docId);
+          const chip = document.createElement("span");
+          chip.className = "doc-pill";
+          chip.textContent = doc?.title || docId;
+          selectedDocs.appendChild(chip);
+        });
+      };
+
+      const getSelectedDocIds = () => {
+        const selectedNodes = Array.from(qaTree.querySelectorAll(".node-checkbox:checked")).map(
+          (checkbox) => checkbox.dataset.nodeId
+        );
+        const selectedDocs = Array.from(qaTree.querySelectorAll(".doc-checkbox:checked")).map(
+          (checkbox) => checkbox.dataset.docId
+        );
+        const docMap = docsByNode();
+        const combined = new Set(selectedDocs);
+        selectedNodes.forEach((nodeId) => {
+          (docMap[nodeId] || []).forEach((doc) => combined.add(doc.doc_id));
+        });
+        return Array.from(combined);
+      };
+
+      const syncSelection = () => {
+        const docIds = getSelectedDocIds();
+        updateSelectionSummary(docIds);
+      };
+
+      async function fetchDocuments() {
+        const response = await fetch("/documents");
+        const data = await response.json();
+        state.documents = data.map((doc) => ({
+          ...doc,
+          title: stripThink(doc.title || ""),
+          labels: (doc.labels || []).map((label) => stripThink(label)),
+        }));
+      }
+
+      async function fetchTaxonomy() {
+        const response = await fetch("/taxonomy");
+        const data = await response.json();
+        state.taxonomy = data;
+      }
+
+      async function refreshAll() {
+        await Promise.all([fetchDocuments(), fetchTaxonomy()]);
+        renderTree(treeView, state.taxonomy.nodes);
+        renderTree(qaTree, state.taxonomy.nodes, { selectable: true });
+        renderOverview();
+        syncSelection();
+      }
+
+      async function suggestPaths(drafts) {
+        if (!drafts.length) return;
+        const payload = {
+          documents: drafts.map((draft) => ({
+            doc_id: draft.doc_id,
+            title: draft.title,
+            labels: draft.labels || [],
+          })),
+        };
+        try {
+          const response = await fetch("/taxonomy/suggest", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          if (!response.ok) {
+            const detail = await response.text();
+            throw new Error(detail || "taxonomy suggest failed");
+          }
+          const suggestions = await response.json();
+          if (!Array.isArray(suggestions)) {
+            throw new Error("taxonomy suggest response invalid");
+          }
+          const map = new Map(suggestions.map((item) => [item.doc_id, item]));
+          state.drafts = drafts.map((draft) => ({
+            ...draft,
+            suggestion: map.get(draft.doc_id) || null,
+          }));
+        } catch (error) {
+          state.drafts = drafts.map((draft) => ({
+            ...draft,
+            suggestion: null,
+          }));
+          throw error;
+        }
+      }
+
+      document.getElementById("uploadBtn").addEventListener("click", async () => {
+        const fileInput = document.getElementById("fileInput");
+        const files = Array.from(fileInput.files || []);
+        if (!files.length) {
+          setStatus(uploadStatus, "请先选择文件。");
+          return;
+        }
+        setStatus(uploadStatus, "上传中...");
+        const form = new FormData();
+        files.forEach((file) => form.append("files", file));
+
+        try {
+          const response = await fetch("/drafts/upload", {
+            method: "POST",
+            body: form,
+          });
+          if (!response.ok) {
+            const detail = await response.text();
+            throw new Error(detail);
+          }
+          const drafts = await response.json();
+          await fetchTaxonomy();
+          let warn = null;
+          try {
+            await suggestPaths(drafts);
+          } catch (error) {
+            warn = error;
+          }
+          renderDrafts();
+          if (warn) {
+            setStatus(uploadStatus, "标题主题已生成，但路径推荐失败，请手动选择。");
+          } else {
+            setStatus(uploadStatus, "已生成标题与主题，请确认并选择路径。");
+          }
+        } catch (error) {
+          setStatus(uploadStatus, `上传失败：${error.message}`);
+        }
+      });
+
+      document.getElementById("confirmAllBtn").addEventListener("click", async () => {
+        if (!state.drafts.length) {
+          setStatus(confirmStatus, "没有待确认的草稿。");
+          return;
+        }
+        setStatus(confirmStatus, "入库中...");
+        const assignments = [];
+        for (const card of draftList.querySelectorAll(".draft-card")) {
+          const draftId = card.dataset.draftId;
+          const docId = card.dataset.docId;
+          const title = stripThink(card.querySelector(".draft-title").value.trim());
+          const labels = parseLabels(stripThink(card.querySelector(".draft-labels").value));
+          const nodeSelect = card.querySelector(".draft-node");
+          const newNodeInput = card.querySelector(".draft-new-node");
+          let nodeId = nodeSelect.value;
+
+          try {
+            if (nodeId === "new") {
+              const name = stripThink(newNodeInput.value.trim());
+              if (!name) {
+                throw new Error("请输入新节点名称");
+              }
+              const nodeResp = await fetch("/taxonomy/nodes", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, parent_id: "root" }),
+              });
+              if (!nodeResp.ok) {
+                throw new Error(await nodeResp.text());
+              }
+              const nodeData = await nodeResp.json();
+              nodeId = nodeData.node_id;
+            }
+
+            const response = await fetch(`/drafts/${draftId}/confirm`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ doc_id: docId, title, labels }),
+            });
+            if (!response.ok) {
+              throw new Error(await response.text());
+            }
+            assignments.push({ doc_id: docId, node_id: nodeId });
+          } catch (error) {
+            setStatus(confirmStatus, `入库失败：${error.message}`);
+            return;
+          }
+        }
+
+        if (assignments.length) {
+          await fetch("/taxonomy/assign/batch", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ assignments }),
+          });
+        }
+
+        state.drafts = [];
+        renderDrafts();
+        await refreshAll();
+        setStatus(confirmStatus, "入库完成。");
+      });
+
+      document.getElementById("rebuildBtn").addEventListener("click", async () => {
+        if (!state.drafts.length) {
+          setStatus(confirmStatus, "请先上传文档再重构。");
+          return;
+        }
+        const payload = {
+          documents: state.drafts.map((draft) => ({
+            doc_id: draft.doc_id,
+            title: draft.title,
+            labels: draft.labels || [],
+          })),
+        };
+        const response = await fetch("/taxonomy/restructure", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!response.ok) {
+          setStatus(confirmStatus, "重构失败，请稍后再试。");
+          return;
+        }
+        const proposal = await response.json();
+        state.restructureProposal = proposal;
+        renderTree(restructureTree, proposal.nodes);
+        restructureModal.classList.add("active");
+      });
+
+      applyRestructureBtn.addEventListener("click", async () => {
+        if (!state.restructureProposal) return;
+        await fetch("/taxonomy/restructure/apply", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(state.restructureProposal),
+        });
+        restructureModal.classList.remove("active");
+        state.restructureProposal = null;
+        await refreshAll();
+        setStatus(confirmStatus, "结构已更新。");
+      });
+
+      document.getElementById("cancelRestructureBtn").addEventListener("click", () => {
+        restructureModal.classList.remove("active");
+        state.restructureProposal = null;
+      });
+
+      document.getElementById("reportBtn").addEventListener("click", async () => {
+        const selected = getSelectedDocIds();
+        const query = document.getElementById("queryInput").value.trim();
+        const payload = {
+          query: query || "请根据所选文档生成报告",
+          top_k: 5,
+          filters: selected.length ? { doc_id: selected } : null,
+        };
+        await runRag(payload);
+      });
+
+      document.getElementById("askBtn").addEventListener("click", async () => {
+        const query = document.getElementById("queryInput").value.trim();
+        if (!query) {
+          setStatus(askStatus, "请先输入问题。");
+          return;
+        }
+        const selected = getSelectedDocIds();
+        const payload = {
+          query,
+          top_k: 5,
+          filters: selected.length ? { doc_id: selected } : null,
+        };
+        await runRag(payload);
+      });
+
+      document.getElementById("clearSelection").addEventListener("click", () => {
+        qaTree.querySelectorAll("input[type='checkbox']").forEach((input) => {
+          input.checked = false;
+        });
+        syncSelection();
+      });
+
+      const runRag = async (payload) => {
+        setStatus(askStatus, "生成中...");
+        try {
+          const response = await fetch("/rag", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          if (!response.ok) {
+            throw new Error(await response.text());
+          }
+          const data = await response.json();
+          answerBox.textContent = stripThink(data.report || "(空)");
+          const refs = new Map();
+          (data.evidence || []).forEach((item) => {
+            const id = item.doc_id || item.metadata?.doc_id;
+            if (!id) return;
+            const title = stripThink(item.title || "") ||
+              state.documents.find((doc) => doc.doc_id === id)?.title ||
+              id;
+            refs.set(id, title);
+          });
+          if (!refs.size) {
+            referenceList.textContent = "暂无";
+          } else {
+            referenceList.innerHTML = "";
+            refs.forEach((title) => {
+              const line = document.createElement("div");
+              line.textContent = title;
+              referenceList.appendChild(line);
+            });
+          }
+          setStatus(askStatus, "完成。");
+        } catch (error) {
+          setStatus(askStatus, `生成失败：${error.message}`);
+        }
+      };
+
+      document.querySelectorAll("[data-panel]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const target = button.dataset.panel;
+          document.querySelectorAll(".panel").forEach((panel) => {
+            panel.classList.toggle("active", panel.id === `panel-${target}`);
+          });
+          document.querySelectorAll(".nav-btn").forEach((btn) => {
+            btn.classList.toggle("active", btn.dataset.panel === target);
+          });
+        });
+      });
+
+      refreshAll().catch(() => {
+        setStatus(statusEl, "无法读取文档与结构数据。");
+      });
+    </script>
+  </body>
+</html>

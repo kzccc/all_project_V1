@@ -1,0 +1,13 @@
+/logs
+/__pycache__
+/model_store
+/src/__pycache__
+/src/models/__pycache__
+/small
+Mumain.py
+/glide_model_cache
+/glide-text2im
+/glide-text2im
+/src/models/generate/__pycache__
+/SegMamba-main
+/pretrained

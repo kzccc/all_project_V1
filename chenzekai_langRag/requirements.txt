@@ -1,0 +1,11 @@
+langchain>=0.2.14
+langchain-community>=0.2.14
+langchain-ollama>=0.1.0
+langchain-chroma>=0.1.0
+chromadb>=0.5.0
+python-dotenv>=1.0.1
+pypdf>=4.2.0
+docx2txt>=0.8
+fastapi>=0.111.0
+uvicorn>=0.30.0
+python-multipart>=0.0.9

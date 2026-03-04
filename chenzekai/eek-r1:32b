@@ -1,0 +1,19 @@
+[0;1;32m●[0m ollama.service - Ollama Service
+   Loaded: loaded (/etc/systemd/system/ollama.service; enabled; vendor preset: disabled)
+   Active: [0;1;32mactive (running)[0m since Tue 2025-11-25 11:01:50 CST; 2min 20s ago
+ Main PID: 250991 (ollama)
+    Tasks: 14 (limit: 1620994)
+   Memory: 11.4M
+   CGroup: /system.slice/ollama.service
+           └─250991 /usr/local/bin/ollama serve
+
+Nov 25 11:01:50 iZwz9b7sxvjqfc6u2hnroeZ ollama[250991]: [GIN-debug] GET    /api/version              --> github.com/ollama/ollama/server.(*Server).GenerateRoutes.func2 (5 handlers)
+Nov 25 11:01:50 iZwz9b7sxvjqfc6u2hnroeZ ollama[250991]: [GIN-debug] HEAD   /                         --> github.com/ollama/ollama/server.(*Server).GenerateRoutes.func1 (5 handlers)
+Nov 25 11:01:50 iZwz9b7sxvjqfc6u2hnroeZ ollama[250991]: [GIN-debug] HEAD   /api/tags                 --> github.com/ollama/ollama/server.(*Server).ListHandler-fm (5 handlers)
+Nov 25 11:01:50 iZwz9b7sxvjqfc6u2hnroeZ ollama[250991]: [GIN-debug] HEAD   /api/version              --> github.com/ollama/ollama/server.(*Server).GenerateRoutes.func2 (5 handlers)
+Nov 25 11:01:50 iZwz9b7sxvjqfc6u2hnroeZ ollama[250991]: time=2025-11-25T11:01:50.569+08:00 level=INFO source=routes.go:1238 msg="Listening on [::]:8181 (version 0.5.7)"
+Nov 25 11:01:50 iZwz9b7sxvjqfc6u2hnroeZ ollama[250991]: time=2025-11-25T11:01:50.570+08:00 level=INFO source=routes.go:1267 msg="Dynamic LLM libraries" runners="[cuda_v11_avx cuda_v12_avx rocm_avx cpu cpu_avx cpu_avx2]"
+Nov 25 11:01:50 iZwz9b7sxvjqfc6u2hnroeZ ollama[250991]: time=2025-11-25T11:01:50.570+08:00 level=INFO source=gpu.go:226 msg="looking for compatible GPUs"
+Nov 25 11:01:50 iZwz9b7sxvjqfc6u2hnroeZ ollama[250991]: time=2025-11-25T11:01:50.573+08:00 level=INFO source=gpu.go:392 msg="no compatible GPUs were discovered"
+Nov 25 11:01:50 iZwz9b7sxvjqfc6u2hnroeZ ollama[250991]: time=2025-11-25T11:01:50.573+08:00 level=INFO source=types.go:131 msg="inference compute" id=0 library=cpu variant=avx2 compute="" driver=0.0 name="" total="247.4 GiB" available="243.5 GiB"
+Nov 25 11:02:33 iZwz9b7sxvjqfc6u2hnroeZ ollama[250991]: [GIN] 2025/11/25 - 11:02:33 | 200 |      38.349µs |   183.6.153.226 | GET      "/"

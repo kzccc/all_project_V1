@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "rag-project"
+version = "0.1.0"
+description = "AI document analysis and classification service"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.0"
+uvicorn = {extras = ["standard"], version = "^0.30.0"}
+httpx = "^0.27.0"
+python-dotenv = "^1.0.1"
+pydantic = "^2.8.0"
+numpy = "^2.1.0"
+faiss-cpu = "^1.8.0"
+python-multipart = "^0.0.9"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.0"
+ruff = "^0.6.0"
+
+[tool.poetry.group.loaders.dependencies]
+python-docx = "^1.1.0"
+python-pptx = "^1.0.0"
+pandas = "^2.2.2"
+openpyxl = "^3.1.5"
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

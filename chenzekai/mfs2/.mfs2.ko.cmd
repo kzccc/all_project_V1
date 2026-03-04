@@ -1,0 +1,1 @@
+cmd_/workspace/chenzekai/mfs2/mfs2.ko := ld -r  -m elf_x86_64  --build-id=sha1  -T scripts/module.lds -o /workspace/chenzekai/mfs2/mfs2.ko /workspace/chenzekai/mfs2/mfs2.o /workspace/chenzekai/mfs2/mfs2.mod.o;  true

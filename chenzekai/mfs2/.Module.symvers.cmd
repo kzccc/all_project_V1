@@ -1,0 +1,1 @@
+cmd_/workspace/chenzekai/mfs2/Module.symvers := sed 's/ko$$/o/' /workspace/chenzekai/mfs2/modules.order | scripts/mod/modpost -m -a   -o /workspace/chenzekai/mfs2/Module.symvers -e -i Module.symvers   -T -

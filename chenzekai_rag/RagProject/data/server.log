@@ -1,0 +1,121 @@
+INFO:     Started server process [1441937]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:58150 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58150 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58166 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48336 - "POST /drafts/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48336 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48336 - "POST /taxonomy/suggest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42232 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42232 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42234 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37182 - "POST /drafts/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37182 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37182 - "POST /taxonomy/suggest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52806 - "POST /drafts/5e2002ac69d4478cb8787f22022afcc3/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52806 - "POST /drafts/6a1bd12ef3034e23b18a77a2584d7cf6/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52806 - "POST /drafts/1cf2d5b4f2284aca9d915a80ca738e68/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52806 - "POST /drafts/2fa8db4057ae45f4944d376bc3ac1055/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52806 - "POST /taxonomy/assign/batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52820 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52836 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51538 - "POST /drafts/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51538 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51538 - "POST /taxonomy/suggest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52550 - "POST /drafts/4b22f679710f46a190457391eed2c97e/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52554 - "POST /drafts/3737872a2b814d06bccbf9febfbed5dd/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52554 - "POST /drafts/ca4ce0fc9fa94f398eb24fb37dcb955c/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52550 - "POST /drafts/48d5612eeaf547c8afb64fcb4c7899cc/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52550 - "POST /drafts/54501265d1a0467b848331cff574c4a7/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52550 - "POST /taxonomy/assign/batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52550 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52554 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51286 - "POST /drafts/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51286 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51286 - "POST /taxonomy/suggest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51286 - "POST /taxonomy/restructure HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42636 - "POST /taxonomy/restructure/apply HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42638 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42650 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43964 - "POST /taxonomy/restructure HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38366 - "POST /taxonomy/restructure HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38366 - "POST /taxonomy/restructure HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38366 - "POST /taxonomy/nodes HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38366 - "POST /drafts/e3be7cb0328b458ebfd513b05ea17f2b/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38366 - "POST /taxonomy/assign/batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38378 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38388 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43262 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43262 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43274 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55442 - "POST /drafts/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55442 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55442 - "POST /taxonomy/suggest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34284 - "POST /taxonomy/restructure HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34292 - "POST /drafts/9b0ec949b5294ccb8d88fb48e40277f5/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34292 - "POST /drafts/54eae834596a4a5fb5caac778d433998/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34292 - "POST /drafts/00a7a3bca7854fc9806e42d30735ec2c/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34302 - "POST /taxonomy/assign/batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34302 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34292 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50162 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50154 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50162 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43736 - "POST /drafts/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43736 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43736 - "POST /taxonomy/suggest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50882 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50882 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50884 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41236 - "POST /drafts/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41236 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41236 - "POST /taxonomy/suggest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46490 - "POST /taxonomy/restructure HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46700 - "POST /drafts/6c446b36a3be4d4fa64e5933942a75af/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46700 - "POST /taxonomy/assign/batch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46700 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59138 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37924 - "POST /rag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52240 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52228 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52250 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52250 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58674 - "POST /mcp/extract_keywords HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58684 - "POST /mcp/search_standards HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42510 - "POST /mcp/extract_keywords HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42516 - "POST /mcp/search_standards HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42524 - "POST /mcp/verify_test_type HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46180 - "POST /mcp/extract_keywords HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46194 - "POST /mcp/search_standards HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46204 - "POST /mcp/verify_test_type HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58412 - "POST /mcp/extract_keywords HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58422 - "POST /mcp/search_standards HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:58436 - "POST /mcp/verify_test_type HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:44048 - "POST /mcp/analyze_image HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:44062 - "POST /mcp/analyze_image HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:44074 - "POST /mcp/extract_keywords HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:44090 - "POST /mcp/search_standards HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:44096 - "POST /mcp/verify_test_type HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:42900 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42900 - "GET /documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42908 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42910 - "POST /drafts/upload HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42910 - "GET /taxonomy HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42910 - "POST /taxonomy/suggest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60084 - "POST /rag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57420 - "POST /rag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57418 - "POST /rag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60090 - "POST /rag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57430 - "POST /rag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57444 - "POST /rag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60084 - "POST /rag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57420 - "POST /rag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57418 - "POST /rag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57430 - "POST /rag HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60090 - "POST /rag HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [1441937]

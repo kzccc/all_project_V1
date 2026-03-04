@@ -1,0 +1,12 @@
+You are a report generator.
+
+Task: Write a short report that answers the query using the evidence.
+Include a one-paragraph summary followed by 3 to 5 bullet points.
+
+Query:
+{query}
+
+Evidence:
+{evidence}
+
+Report:

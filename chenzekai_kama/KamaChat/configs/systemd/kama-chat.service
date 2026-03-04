@@ -1,0 +1,14 @@
+[Unit]
+Description=KamaChat Server
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/workspace/czk/chenzekai_kama/KamaChat
+Environment=KAMA_CHAT_CONFIG=/workspace/czk/chenzekai_kama/KamaChat/configs/config.toml
+ExecStart=/usr/local/bin/kama_chat_server
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

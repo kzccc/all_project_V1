@@ -1,0 +1,23 @@
+mysql:
+  dns: root:@tcp(127.0.0.1:3306)/ginchat?charset=utf8mb4&parseTime=True&loc=Local
+redis:
+  addr: "172.0.0.1:6379"#地址端口
+  password: ""          #密码
+  DB: 0                 #数据库编号
+  poolSize: 30      #连接池最大连接数
+  minIdleConn: 30       #最小空闲连接数 
+oss:
+  Endpoint: "oss-cn-hangzhou.aliyuncs.com"#服务接入点也叫地域节点
+  AccessKeyId: "LTAI5tNCXPJwS3MstKoKgixh"#阿里云访问密钥ID，用于标识用户身份
+  AccessKeySecret: "YhHE8OyCMsqfjwOnxQ1oO7paYlDjVHX"#密码
+  Bucket : "ginchat"             #存储空间名称
+
+timeout:
+  DelayHeartbeat: 3   #延迟心跳时间  单位秒
+  HeartbeatHz: 30   #每隔多少秒心跳时间   
+  HeartbeatMaxTime: 30000  #最大心跳时间  ，超过此就下线 
+  RedisOnlineTime: 4  #缓存的在线用户时长   单位H
+
+port:
+  server: ":8082"
+  udp: 3001

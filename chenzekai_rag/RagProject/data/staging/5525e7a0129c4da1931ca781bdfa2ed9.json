@@ -1,0 +1,18 @@
+{
+  "draft_id": "5525e7a0129c4da1931ca781bdfa2ed9",
+  "doc_id": "提示词rag",
+  "metadata": {
+    "source_type": "txt",
+    "original_name": "提示词rag.txt"
+  },
+  "source_path": "data/uploads/9822ded32f9d4d0f914d10ffd53ee8fc_提示词rag.txt",
+  "title": "\"智能文档上传与管理：支持批量处理、动态树结构及问答生成\"",
+  "labels": [
+    "知识库管理",
+    "树状结构设计",
+    "动态组织",
+    "智能分类与聚类",
+    "用户界面设计"
+  ],
+  "text_path": "data/staging/5525e7a0129c4da1931ca781bdfa2ed9.txt"
+}
