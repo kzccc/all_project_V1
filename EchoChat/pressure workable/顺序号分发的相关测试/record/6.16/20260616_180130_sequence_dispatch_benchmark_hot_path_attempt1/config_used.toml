@@ -1,0 +1,137 @@
+[run]
+label_mode = "manual"
+label = "20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+label_suffix = ""
+report_layout = "bundle"
+base_config = "configs/config_local_singlebroker_part240_mysqlpersist_tune2.toml"
+seed_prefix = "SEQH1"
+record_root = "pressure workable/顺序号分发的相关测试/record"
+mysql_runtime_root = "./runtime/mysql_isolated"
+database = "echochat_sequence_dispatch_bench"
+
+[mainconfig]
+target_rate = 2400
+session_count = 300
+topic_partitions = 10
+conversation_bucket_worker_count = 20
+conversation_bucket_ready_queue_size = 1024
+conversation_bucket_bucket_queue_size = 1024
+conversation_bucket_max_messages_per_turn = 1
+conversation_bucket_max_run_duration_ms = 1
+mysql_persist_worker_count = 2
+mysql_persist_batch_size = 300
+
+[conversation_bucket]
+enabled = true
+worker_count = 20
+ready_queue_size = 1024
+bucket_queue_size = 1024
+max_messages_per_turn = 1
+max_run_duration_ms = 1
+drain_timeout_ms = 3000
+
+[scenario]
+session_count = 300
+fixture_pair_count = 3600
+user_count = 1200
+target_rate = 2400
+duration_sec = 20
+max_messages = 0
+partition_selection_mode = "balanced"
+session_partition_balance_mode = "on"
+worker_balance_mode = "off"
+
+[consumers]
+count = 1
+base_port = 18082
+ports = "18082"
+client_ports = "18082"
+
+[kafka]
+broker_count = 1
+host_port = "127.0.0.1:9092"
+login_topic = "login"
+logout_topic = "logout"
+chat_topic_prefix = "chat_message_sequence_dispatch_hot_path"
+unique_topic_per_run = true
+topic_partitions = 10
+topic_replication_factor = 1
+message_key = "chat"
+partition_fallback = 1
+timeout_sec = 1
+producer_retry_max = 3
+producer_retry_backoff_ms = 200
+min_insync_replicas = 1
+
+[mysql]
+host = "127.0.0.1"
+port = 33306
+user = "root"
+password = ""
+database_name = "echochat_sequence_dispatch_bench"
+max_open_conns = 500
+max_idle_conns = 100
+conn_max_lifetime_minutes = 30
+conn_max_idle_time_minutes = 10
+
+[redis]
+host = "127.0.0.1"
+port = 6379
+password = ""
+db = 0
+
+[commit]
+batch_size = 400
+interval_ms = 250
+
+[persist]
+batch_size = 300
+first_job_hold_ms = 0.5
+flush_interval_ms = 7
+worker_count = 2
+queue_size = 4096
+session_seq_redis_only_experimental = false
+mysql_persist_noop_experimental = false
+group_async_pipeline_experimental = false
+group_async_shard_count = 1
+
+[status]
+status_update_noop_experimental = false
+
+[partition_async]
+enabled = false
+shard_count = 20
+queue_size = 512
+drain_timeout_ms = 3000
+
+[benchmark]
+message_timeout_ms = 60000
+setup_workers = 0
+setup_http_timeout_ms = 0
+connection_settle_ms = 1500
+session_seq_warmup_enabled = true
+session_seq_warmup_interval_ms = 10
+session_seq_warmup_timeout_ms = 15000
+session_seq_warmup_settle_ms = 1000
+drain_wait_ms = 5000
+drain_idle_ms = 1000
+post_run_settle_ms = 1000
+ws_path = "/bench/wss"
+seed_reset_prefix = true
+session_seq_reset_state_before_run = true
+session_seq_force_flush_after_warmup = true
+session_seq_prepare_recovery_after_warmup = false
+
+[logging]
+level = "info"
+disable_stdout = true
+disable_benchmark_request_log = true
+disable_benchmark_hot_path_log = true
+
+[cleanup]
+delete_legacy_redis_pressure_keys_before_run = false
+delete_current_redis_pressure_keys = true
+delete_raw_runner = false
+delete_generated_dir = false
+delete_mysql_runtime_dir = true
+delete_bundle_after_finish = false

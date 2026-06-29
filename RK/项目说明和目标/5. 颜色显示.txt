@@ -1,0 +1,96 @@
+ 以下是图片中的文字提取：
+
+---
+
+## 一、了解硬件特性
+
+lcd屏幕，帧缓冲设备，/dev/fb0~fbx-1（x个lcd屏幕设备）
+
+1. 宽：1024，高：600，像素点/尺寸/分辨率：1024*600
+
+```c
+数据类型 argb_buf[1024*600];
+```
+
+2. 位深度（一个像素点所占用的空间大小）：32 位
+
+```c
+// lcd : 32 == 4 字节, 1 字节 = 8 位
+int argb_buf[1024*600];  // 4 * 1024*600
+char argb_buf[4*1024*600];       // 1 * 4*1024*600
+```
+
+3. 属性组成（一个像素点的属性组成）：透明度，红，绿，蓝
+
+```c
+// 10 1 0~255
+int color = 1242341234;
+// 16 1 0~0xff
+//       透明度，红，绿，蓝
+// 16 4 0~0xff   ff  ff  ff
+int blue = 0x000000ff;
+int green = 0x0000ff00;
+```
+
+---
+
+## 二、操作硬件
+
+应用工程师使用驱动工程师给到的接口（调用的函数的名字，函数的参数列表，这个函数能够实现什么）实现硬件操作
+
+文件编程（标准输入输出/系统输入输出）
+
+### 1. 打开文件（open）
+
+```c
+// 1. 函数原型
+int open(const char *path, int flags);
+// int 整型的变量一般是open的返回值用于存储open打开时的状态如果是负数则说明打开失败 = open("即将被打开的文件名字（路径/名称）", 打开时的权限:O_RDWR可读可写:O_RDONLY只读O_WRONLY只写);
+// a. 包含头文件
+#include <fcntl.h>
+
+// b.
+// b.1. 调用函数打开lcd屏幕 "/dev/fb0"
+int lcd_fd = open("/dev/fb0", O_RDWR);
+if (-1 == lcd_fd) {
+    printf("open lcd device failed!\n");
+    return -1;
+}
+```
+
+### 2. 操作文件（read/write）
+
+```c
+// 1. 函数原型
+ssize_t read(int fd, void buf[count], size_t count);
+// read(已经打开的文件的别名一般是open的返回值，从对应打开的文件或设备中读取到的数据放置的缓冲区，缓冲区的大小/数据的数量);
+
+ssize_t write(int fd, void buf[count], size_t count);
+// write(已经打开的文件的别名一般是open的返回值，即将写入到对应文件中的数据放置的缓冲区，缓冲区的大小/数据的数量);
+
+// a. 包含头文件
+#include <unistd.h>
+
+// b. 调用函数
+int argb_buf[1024*600];
+
+// 设置颜色 for 遍历
+
+// 写入数据到lcd屏幕中
+write(lcd_fd, argb_buf, 1024*600*4);
+// 从bmp图片中读取图像颜色数据
+read(bmp_fd, argb_buf, 1024*600*4);
+```
+
+### 3. 关闭文件（close）
+
+```c
+// 1. 函数原型
+int close(int fd);
+// close(已经打开的文件的别名一般是open的返回值)
+// a. 包含头文件
+#include <unistd.h>
+
+// b. 调用函数
+close(lcd_fd);
+```

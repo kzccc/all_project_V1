@@ -1,0 +1,89 @@
+以下是图片中的全部文字内容：
+
+---
+
+目录检索在开发中使用频繁，也是有步骤
+
+**1. 打开目录（opendir）**
+
+```c
+// 函数原型：
+DIR *opendir(const char *name);
+// DIR * 目录操作指针 = opendir("即将要被打开的目录名字");
+
+// a. 包含头文件
+#include <sys/types.h>
+#include <dirent.h>
+
+// b. 调用函数 目录路径可以用pwd得知对应的位置
+DIR * dirp = opendir("/root");
+```
+
+**2. 读取目录（readdir）**
+
+```c
+// 函数原型
+struct dirent *readdir(DIR *dirp);
+// struct dirent *目录属性结构体指针 = readdir(已经打开的目录别名一般是opendir的返回值);
+
+// a. 包含头文件
+#include <dirent.h>
+
+while (1) {
+    // b. 调用函数 目录路径可以用pwd得知对应的位置
+    struct dirent *dir_ptr = readdir(dirp);
+
+    if (dir_ptr == NULL) {
+        return -1;
+    }
+
+    // 目录属性结构体
+    // struct dirent {
+    //     ino_t          d_ino;       /* Inode number */
+    //     off_t          d_off;       /* Not an offset; see below */
+    //     unsigned short d_reclen;    /* Length of this record */
+    //     unsigned char  d_type;      /* Type of file; not supported
+    //                                   by all filesystem types */
+    //     char           d_name[256]; /* Null-terminated filename */
+    // };
+
+    printf("%s\n", dir_ptr->d_name);
+}
+```
+
+**3. 查看目录文件属性（判断）**
+
+```c
+// 文件类型如下：
+//DT_BLK      块设备（存储设备）
+//DT_CHR      字符设备（输入输出设备）
+//DT_DIR      目录/文件夹
+//DT_FIFO     管道文件/线程/进程
+//DT_LNK      链接文件/快捷方式
+//DT_REG      普通文件（jpg，png，bmp）
+//DT_SOCK     套接字文件/网络文件
+//DT_UNKNOWN  未知文件
+
+if (dir_ptr->d_type == DT_REG) {
+
+}
+```
+
+**4. 关闭目录（closedir）**
+
+```c
+// 函数原型
+int closedir(DIR *dirp);
+// closedir(已经打开的目录别名一般是opendir的返回值即将要被关闭目录);
+
+// a. 包含头文件
+#include <sys/types.h>
+#include <dirent.h>
+
+// b. 调用函数
+closedir(dir_ptr);
+```
+
+---
+
+📎 readdir.c  15.77KB

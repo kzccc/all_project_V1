@@ -1,0 +1,8 @@
+{
+  "config_path": "/my_storage/czk/Personal/EchoChat/pressure workable/顺序号分发的相关测试/record/generated_configs/hot_path_attempt1.toml",
+  "bundle_dir": "/my_storage/czk/Personal/EchoChat/pressure workable/顺序号分发的相关测试/record/6.16/20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1",
+  "raw_dir": "/my_storage/czk/Personal/EchoChat/pressure workable/顺序号分发的相关测试/record/6.16/20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1/raw_runner",
+  "runtime_config_path": "/my_storage/czk/Personal/EchoChat/pressure workable/顺序号分发的相关测试/record/6.16/20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1/raw_runner/runtime_config.toml",
+  "mysql_runtime_root": "/my_storage/czk/Personal/EchoChat/runtime/mysql_isolated/20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1",
+  "status": "packaged_00_13"
+}

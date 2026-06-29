@@ -1,0 +1,55 @@
+[run]
+label = "sequence_dispatch_benchmark"
+record_root = "pressure workable/顺序号分发的相关测试/record"
+report_root = "pressure workable/顺序号分发的相关测试/reports"
+base_pressure_config = "pressure testing/configs/single_chat_pressure.toml"
+base_runner_script = "pressure testing/scripts/run_single_chat_pressure.py"
+
+[shared]
+base_config = "configs/config_local_singlebroker_part240_mysqlpersist_tune2.toml"
+seed_prefix = "SEQBEN"
+mysql_runtime_root = "./runtime/mysql_isolated"
+database = "echochat_sequence_dispatch_bench"
+target_rate = 2400
+duration_sec = 20
+session_count = 300
+fixture_pair_count = 3600
+user_count = 1200
+topic_partitions = 10
+consumer_count = 1
+consumer_base_port = 18082
+kafka_host_port = "127.0.0.1:9092"
+mysql_host = "127.0.0.1"
+mysql_port = 33306
+redis_host = "127.0.0.1"
+redis_port = 6379
+conversation_bucket_enabled = true
+conversation_bucket_worker_count = 20
+conversation_bucket_ready_queue_size = 1024
+conversation_bucket_bucket_queue_size = 1024
+conversation_bucket_max_messages_per_turn = 1
+conversation_bucket_max_run_duration_ms = 1
+mysql_persist_worker_count = 2
+mysql_persist_batch_size = 300
+mysql_persist_queue_size = 4096
+delete_mysql_runtime_dir = true
+
+[benchmark]
+message_timeout_ms = 60000
+setup_workers = 0
+setup_http_timeout_ms = 0
+connection_settle_ms = 1500
+drain_wait_ms = 5000
+drain_idle_ms = 1000
+post_run_settle_ms = 1000
+ws_path = "/bench/wss"
+seed_reset_prefix = true
+
+[analysis]
+outlier_sigma = 4.0
+max_retry_rounds = 2
+min_expected_hot_count = 5000
+min_expected_recovery_count = 200
+
+[stages]
+name = "main"

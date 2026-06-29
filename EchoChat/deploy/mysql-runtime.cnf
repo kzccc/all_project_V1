@@ -1,0 +1,11 @@
+[mysqld]
+user=mysql
+port=3306
+bind-address=127.0.0.1
+datadir=/workspace/czk/Personal/EchoChat/runtime/mysql/data
+socket=/workspace/czk/Personal/EchoChat/runtime/mysql/run/mysqld.sock
+pid-file=/workspace/czk/Personal/EchoChat/runtime/mysql/run/mysqld.pid
+log-error=/workspace/czk/Personal/EchoChat/runtime/mysql/log/mysql-error.log
+tmpdir=/workspace/czk/Personal/EchoChat/runtime/mysql/tmp
+lc-messages-dir=/root/anaconda3/pkgs/mysql-common-9.3.0-h9e076cb_4/share/mysql
+mysqlx=0

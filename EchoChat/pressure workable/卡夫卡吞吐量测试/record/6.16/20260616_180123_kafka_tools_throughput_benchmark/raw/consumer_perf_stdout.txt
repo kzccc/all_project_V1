@@ -1,0 +1,2 @@
+WARNING: option [threads] and [num-fetch-threads] have been deprecated and will be ignored by the test
+2026-06-16 18:01:36:961, 2026-06-16 18:01:38:219, 292.9688, 232.8845, 300000, 238473.7679, 716, 542, 540.5327, 553505.5351

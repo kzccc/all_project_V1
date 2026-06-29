@@ -1,0 +1,45 @@
+当前状态：
+
+  1. RK3568 板子已联网，IP 是 192.168.1.21，SSH 可登录，root 密码我已改过，但你不要改动现有登录方式。
+  2. 板子已经和云服务器建立了通信桥，不需要 Windows 参与中转。
+  3. 云服务器上的桥接服务已在运行：
+     - 服务脚本：/root/board_bridge_server.py
+     - 本地监听：127.0.0.1:19090
+     - 公网入口：/bridge
+     - nginx 已把 /bridge 代理到 127.0.0.1:19090
+  4. 板子上的常驻客户端已装好：
+     - 脚本：/tmp/board_bridge_client.py
+     - 自启脚本：/etc/init.d/S90board_bridge
+     - 开机后会自动启动，持续向云服务器发心跳并轮询任务
+  5. 现在板子已经能向云服务器上报心跳，云端状态里能看到 RK356X。
+
+  通信方式：
+
+  - 板子 -> 云服务器
+    - POST /bridge/heartbeat  上报心跳
+    - GET  /bridge/task?board_id=xxx  拉取任务
+    - POST /bridge/report     回传任务结果
+
+  - 云服务器 -> 板子
+    - POST /bridge/command    下发命令到任务队列
+  使用方式：
+
+  - 查状态：
+    http://8.129.31.210/bridge/status
+
+  - 下发命令示例：
+    POST http://8.129.31.210/bridge/command
+    JSON：
+    {"board_id":"*","task_id":"demo-001","cmd":"echo hello && uname -a && hostname -i"}
+
+  约束：
+
+  - 板子是 Buildroot 系统，不要假设有 gcc/cmake/make。
+  - 板子上尽量只用 BusyBox + python3 + 现有脚本。
+  - 需要编译 RK3568 程序时，优先在云服务器用交叉编译器 aarch64-linux-gnu-gcc 编译，再用 scp 发到板子。
+  - BusyBox 的 hostname 不支持 hostname -I，要用 hostname -i 或 ip addr。
+
+  你接下来要做的事情：
+  1. 继续稳定这个桥接服务，保证板子重启后自动连上。
+  2. 如果要做项目开发，优先走“云服务器交叉编译 -> scp 到板子运行”的流程。
+  3. 不要再依赖 Windows 中转。

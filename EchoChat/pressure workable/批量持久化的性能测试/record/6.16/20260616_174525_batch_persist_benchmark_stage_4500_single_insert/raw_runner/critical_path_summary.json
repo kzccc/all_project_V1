@@ -1,0 +1,127 @@
+{
+  "summary": {
+    "scenario": "single",
+    "mode": "pressure",
+    "run_id": "pressure-single-1781603139",
+    "pair_count": 100,
+    "messages_per_sender": 900,
+    "send_interval_ms": 22,
+    "expected_messages": 90000,
+    "received_messages": 90000,
+    "received_messages_before_drain": 24009,
+    "drain_recovered_messages": 65991,
+    "delivery_success_rate": 1.0,
+    "duration_sec": 73.458,
+    "observed_throughput_msg_per_sec": 1225.193,
+    "send_window_start_ms": 1781603141654,
+    "send_window_end_ms": 1781603161453,
+    "send_window_duration_ms": 19799,
+    "latency": {
+      "count": 90000,
+      "avg_ms": 26191.034,
+      "p50_ms": 26272.0,
+      "p95_ms": 49366.05,
+      "p99_ms": 51356.0,
+      "max_ms": 51816
+    },
+    "drain": {
+      "enabled": true,
+      "max_wait_ms": 5000,
+      "idle_wait_ms": 1000,
+      "pairs_timeout": 0,
+      "pairs_applied": 0
+    },
+    "server_resource_peak": {
+      "samples": 369,
+      "rss_peak_mb": 37.051,
+      "threads_peak": 45,
+      "fd_peak": 7
+    },
+    "started_at_unix": 1781603139,
+    "started_at_ms": 1781603139657,
+    "finished_at_unix": 1781603213,
+    "finished_at_ms": 1781603213280
+  },
+  "time_anchor_ms": 1781603141654.0,
+  "trace_counts": {
+    "registered_messages": 90000,
+    "event_count": 2160000
+  },
+  "stage_metrics": {
+    "conversation_bucket_enqueue_ms": {
+      "count": 90000,
+      "avg_ms": 0.003,
+      "p50_ms": 0.001,
+      "p95_ms": 0.004,
+      "p99_ms": 0.02,
+      "max_ms": 33.129
+    },
+    "conversation_dispatch_queue_wait_ms": {
+      "count": 90000,
+      "avg_ms": 26110.858,
+      "p50_ms": 26196.852,
+      "p95_ms": 49289.892,
+      "p99_ms": 51284.061,
+      "max_ms": 51745.204
+    },
+    "conversation_bucket_queue_wait_ms": {
+      "count": 90000,
+      "avg_ms": 26110.858,
+      "p50_ms": 26196.852,
+      "p95_ms": 49289.892,
+      "p99_ms": 51284.061,
+      "max_ms": 51745.204
+    },
+    "conversation_ready_queue_wait_ms": {
+      "count": 90000,
+      "avg_ms": 26067.732,
+      "p50_ms": 26164.257,
+      "p95_ms": 49275.384,
+      "p99_ms": 51218.291,
+      "max_ms": 51702.909
+    },
+    "mysql_persist_ms": {
+      "count": 90000,
+      "avg_ms": 79.423,
+      "p50_ms": 74.209,
+      "p95_ms": 127.265,
+      "p99_ms": 158.977,
+      "max_ms": 350.119
+    },
+    "receiver_ws_write_ms": {
+      "count": 90000,
+      "avg_ms": 0.052,
+      "p50_ms": 0.048,
+      "p95_ms": 0.069,
+      "p99_ms": 0.081,
+      "max_ms": 49.313
+    },
+    "server_critical_path_ms": {
+      "count": 90000,
+      "avg_ms": 26190.362,
+      "p50_ms": 26271.625,
+      "p95_ms": 49365.829,
+      "p99_ms": 51355.788,
+      "max_ms": 51816.199
+    },
+    "end_to_end_ms": {
+      "count": 90000,
+      "avg_ms": 26191.465,
+      "p50_ms": 26272.349,
+      "p95_ms": 49366.395,
+      "p99_ms": 51356.348,
+      "max_ms": 51816.894
+    }
+  },
+  "persist": {
+    "flush_count": 90000,
+    "flush_reason_counts": {
+      "batch_full": 90000
+    },
+    "flush_worker_counts": {
+      "0": 90000
+    },
+    "avg_flush_batch_size": 1.0,
+    "avg_enqueue_queue_depth": 97.924
+  }
+}

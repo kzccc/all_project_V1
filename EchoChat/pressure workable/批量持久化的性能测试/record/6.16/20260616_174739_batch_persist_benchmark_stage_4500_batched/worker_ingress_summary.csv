@@ -1,0 +1,2 @@
+worker_index,total_events,events_in_window,peak_count_per_bin,avg_count_per_bin,non_zero_bins
+0,90000,90000,52,4.5,15718

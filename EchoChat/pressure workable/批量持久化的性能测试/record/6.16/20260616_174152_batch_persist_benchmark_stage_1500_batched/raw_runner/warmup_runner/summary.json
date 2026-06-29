@@ -1,0 +1,43 @@
+{
+  "scenario": "single",
+  "mode": "warmup",
+  "run_id": "warmup-single-1781602924",
+  "pair_count": 100,
+  "messages_per_sender": 1,
+  "send_interval_ms": 10,
+  "expected_messages": 100,
+  "received_messages": 100,
+  "received_messages_before_drain": 0,
+  "drain_recovered_messages": 100,
+  "delivery_success_rate": 1.0,
+  "duration_sec": 1.943,
+  "observed_throughput_msg_per_sec": 51.477,
+  "send_window_start_ms": 1781602926772,
+  "send_window_end_ms": 1781602926782,
+  "send_window_duration_ms": 10,
+  "latency": {
+    "count": 100,
+    "avg_ms": 29.5,
+    "p50_ms": 24.0,
+    "p95_ms": 49.0,
+    "p99_ms": 49.01,
+    "max_ms": 50
+  },
+  "drain": {
+    "enabled": true,
+    "max_wait_ms": 5000,
+    "idle_wait_ms": 1000,
+    "pairs_timeout": 0,
+    "pairs_applied": 0
+  },
+  "server_resource_peak": {
+    "samples": 12,
+    "rss_peak_mb": 39.57,
+    "threads_peak": 41,
+    "fd_peak": 7
+  },
+  "started_at_unix": 1781602924,
+  "started_at_ms": 1781602924684,
+  "finished_at_unix": 1781602926,
+  "finished_at_ms": 1781602926831
+}

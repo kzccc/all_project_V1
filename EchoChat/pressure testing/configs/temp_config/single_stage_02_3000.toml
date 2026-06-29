@@ -1,0 +1,104 @@
+[run]
+base_config = "configs/config_local_singlebroker_part240_mysqlpersist_tune2.toml"
+record_root = "pressure testing/record"
+report_layout = "bundle"
+seed_prefix = "P3K03"
+database = "echochat_stage_02_3000"
+label_suffix = "stage02_3000"
+mysql_runtime_root = "./runtime/mysql_isolated"
+
+[mainconfig]
+target_rate = 3000
+session_count = 100
+topic_partitions = 10
+conversation_bucket_worker_count = 10
+conversation_bucket_ready_queue_size = 1024
+conversation_bucket_bucket_queue_size = 1024
+conversation_bucket_max_messages_per_turn = 1
+conversation_bucket_max_run_duration_ms = 1
+mysql_persist_worker_count = 1
+mysql_persist_batch_size = 100
+
+[conversation_bucket]
+enabled = true
+worker_count = 20
+ready_queue_size = 1024
+bucket_queue_size = 1024
+max_messages_per_turn = 1
+max_run_duration_ms = 1
+drain_timeout_ms = 3000
+
+[scenario]
+session_count = 100
+fixture_pair_count = 800
+user_count = 240
+target_rate = 3000
+duration_sec = 10
+max_messages = 0
+partition_selection_mode = "balanced"
+session_partition_balance_mode = "on"
+worker_balance_mode = "off"
+
+[consumers]
+count = 1
+base_port = 19102
+ports = "19102"
+client_ports = "19102"
+
+[kafka]
+broker_count = 1
+host_port = "127.0.0.1:9092"
+chat_topic_prefix = "chat_message_pressure_single"
+unique_topic_per_run = true
+topic_partitions = 10
+
+[mysql]
+host = "127.0.0.1"
+port = 33306
+database_name = "echochat_stage_02_3000"
+
+[redis]
+host = "127.0.0.1"
+port = 6379
+db = 0
+
+[commit]
+batch_size = 400
+interval_ms = 250
+
+[persist]
+batch_size = 100
+first_job_hold_ms = 0.5
+flush_interval_ms = 7
+worker_count = 1
+queue_size = 4096
+session_seq_redis_only_experimental = false
+mysql_persist_noop_experimental = false
+
+[partition_async]
+enabled = false
+shard_count = 20
+queue_size = 512
+drain_timeout_ms = 3000
+
+[benchmark]
+message_timeout_ms = 60000
+connection_settle_ms = 1500
+setup_workers = 0
+setup_http_timeout_ms = 0
+ws_open_timeout_ms = 30000
+drain_wait_ms = 5000
+drain_idle_ms = 1000
+post_run_settle_ms = 1000
+ws_path = "/bench/wss"
+seed_reset_prefix = true
+
+[logging]
+level = "info"
+disable_stdout = true
+disable_benchmark_request_log = true
+disable_benchmark_hot_path_log = true
+
+[cleanup]
+delete_current_redis_pressure_keys = true
+delete_mysql_runtime_dir = true

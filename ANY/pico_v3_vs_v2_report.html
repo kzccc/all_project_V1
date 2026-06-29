@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pico V3 vs V2 对比报告</title>
+  <style>
+    :root {
+      --bg: #f5efe3;
+      --panel: rgba(255, 252, 246, 0.88);
+      --panel-strong: #fffaf1;
+      --text: #1e1a16;
+      --muted: #6d655b;
+      --line: rgba(63, 48, 32, 0.14);
+      --accent: #ab3f17;
+      --accent-2: #0c6b62;
+      --accent-3: #b38a16;
+      --shadow: 0 20px 60px rgba(53, 35, 18, 0.12);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(179, 138, 22, 0.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(12, 107, 98, 0.16), transparent 24%),
+        linear-gradient(180deg, #fbf7ee 0%, var(--bg) 100%);
+      line-height: 1.65;
+    }
+
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 24px 72px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(171, 63, 23, 0.95), rgba(98, 48, 21, 0.92)),
+        linear-gradient(135deg, #a33b12, #3e2514);
+      color: #fff9f1;
+      border-radius: 32px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      top: -90px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255, 241, 212, 0.12);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 6px 12px;
+      border: 1px solid rgba(255, 245, 227, 0.24);
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    h1, h2, h3, h4, p {
+      margin: 0;
+    }
+
+    h1 {
+      margin-top: 18px;
+      font-size: clamp(32px, 4.8vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      margin-top: 18px;
+      max-width: 860px;
+      color: rgba(255, 248, 238, 0.9);
+      font-size: 17px;
+    }
+
+    .meta-grid,
+    .stat-grid,
+    .card-grid,
+    .delta-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .meta-grid {
+      margin-top: 28px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .meta {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      backdrop-filter: blur(6px);
+    }
+
+    .meta .label {
+      font-size: 12px;
+      color: rgba(255, 244, 226, 0.72);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .meta .value {
+      margin-top: 6px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      font-size: 26px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-head .hint {
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 640px;
+      text-align: right;
+    }
+
+    .stat-grid {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .stat {
+      background: var(--panel-strong);
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      padding: 20px;
+    }
+
+    .stat .num {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .stat .name {
+      margin-top: 8px;
+      font-weight: 700;
+    }
+
+    .stat .desc {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .summary-box {
+      padding: 22px 24px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(12, 107, 98, 0.08), rgba(171, 63, 23, 0.08));
+      border: 1px solid var(--line);
+    }
+
+    .summary-box strong {
+      color: var(--accent);
+    }
+
+    .card-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .card {
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: white;
+      background: var(--accent);
+    }
+
+    .badge.teal {
+      background: var(--accent-2);
+    }
+
+    .badge.gold {
+      background: var(--accent-3);
+      color: #2f2200;
+    }
+
+    ul {
+      padding-left: 18px;
+      margin: 0;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    .delta-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+    }
+
+    th, td {
+      padding: 16px 18px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      background: rgba(30, 26, 22, 0.04);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    code {
+      font-family: "SFMono-Regular", "Consolas", "Liberation Mono", monospace;
+      font-size: 0.94em;
+      background: rgba(30, 26, 22, 0.06);
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+
+    .source-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .source {
+      padding: 8px 12px;
+      border-radius: 12px;
+      background: rgba(12, 107, 98, 0.08);
+      border: 1px solid rgba(12, 107, 98, 0.12);
+      color: #154641;
+      font-size: 14px;
+    }
+
+    .footer {
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 960px) {
+      .delta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head .hint {
+        margin-top: 8px;
+        text-align: left;
+      }
+
+      .hero {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <span class="eyebrow">Pico Architecture Review</span>
+      <h1>Pico V3 相比 V2，没有明显的核心能力代际提升，主要是配置和恢复链路的工程化整理</h1>
+      <p>
+        本报告对比的是 <code>/my_storage/czk/Personal/PicoV3/pico</code> 的 V3 核心项目与
+        <code>/workspace/czk/Personal/pico</code> 的 V2 核心项目。对比时聚焦 <code>pico/</code>、<code>tests/</code>、<code>scripts/</code>、<code>README.md</code>、
+        <code>pyproject.toml</code> 等主产品代码；V2 仓库里的 <code>LEARN_CLAUDE</code> 资料目录未计入核心能力比较。
+      </p>
+      <div class="meta-grid">
+        <div class="meta">
+          <div class="label">对比结论</div>
+          <div class="value">核心能力层面没有拉开明显差距，主要变化集中在配置方式、恢复细节和实验脚手架。</div>
+        </div>
+        <div class="meta">
+          <div class="label">分析方式</div>
+          <div class="value">静态阅读目录结构、README、CLI、runtime、memory、context、metrics、测试。</div>
+        </div>
+        <div class="meta">
+          <div class="label">核心范围</div>
+          <div class="value">配置、Provider、恢复链路、持久记忆、提示词预算、安全脱敏、基准测试。</div>
+        </div>
+        <div class="meta">
+          <div class="label">输出时间</div>
+          <div class="value">2026-05-23</div>
+        </div>
+      </div>
+    </header>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>一眼看懂</h2>
+        <div class="hint">如果只看一句话：V2 的核心能力已经基本具备，V3 更多是在已有框架上补配置、恢复和评测细节。</div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="num">+1</div>
+          <div class="name">新增模型通道</div>
+          <div class="desc">V3 新增 DeepSeek Anthropic-compatible 支持。</div>
+        </div>
+        <div class="stat">
+          <div class="num">+1</div>
+          <div class="name">新增配置模块</div>
+          <div class="desc">新增 <code>pico/config.py</code>，把项目级 <code>.env</code> 纳入正式配置链路。</div>
+        </div>
+        <div class="stat">
+          <div class="num">10</div>
+          <div class="name">V3 测试文件</div>
+          <div class="desc">V3 继续覆盖核心逻辑，并把新功能测试补到位。</div>
+        </div>
+        <div class="stat">
+          <div class="num">18</div>
+          <div class="name">V2 测试文件</div>
+          <div class="desc">V2 仓库更大，但含额外学习资料目录；核心产品并不代表更完整。</div>
+        </div>
+      </div>
+      <div class="summary-box" style="margin-top:18px;">
+        <strong>总体判断：</strong>
+        如果你只关心 <strong>agent 本身是不是更会做事</strong>，那答案是：
+        <strong>没有看到特别硬的能力跳升</strong>。
+        V3 主要是把 V2 已有方向往工程化和可复盘上继续推，而不是在工具能力、推理流程或任务完成范式上出现明显新台阶。
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>V3 真正算得上改进的地方</h2>
+        <div class="hint">只保留对核心使用体验有感知的部分，不放大边角项。</div>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <span class="badge">配置体系</span>
+          <h3>从全局隐式配置，改成项目内显式配置</h3>
+          <ul>
+            <li>V2 会读取 <code>~/.pico/config.json</code>，首次还会尝试从 <code>~/.codex/config.toml</code>、<code>~/.codex/auth.json</code> 引导默认配置。</li>
+            <li>V3 改成新增 <code>pico/config.py</code>，正式支持项目根目录向上查找 <code>.env</code>，并提供 <code>PICO_*</code> 命名空间。</li>
+            <li>这更像使用方式优化，不是 agent 智能本身增强。</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="badge teal">恢复机制</span>
+          <h3>resume 从“能接着聊”升级到“能判断恢复是否可信”</h3>
+          <ul>
+            <li>V3 对 checkpoint 新增了 <code>schema_version</code>、<code>runtime_identity</code>、<code>freshness</code>、<code>key_files</code> 等结构。</li>
+            <li>恢复状态被细分为 <code>full-valid</code>、<code>partial-stale</code>、<code>workspace-mismatch</code>、<code>schema-mismatch</code>、<code>no-checkpoint</code>。</li>
+            <li>这是 V3 最接近核心能力提升的一项，因为它直接影响“恢复后还能不能继续正确做事”。</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="badge gold">提示词预算</span>
+          <h3>上下文压缩逻辑更明确，也更可解释</h3>
+          <ul>
+            <li>V3 的 <code>ContextManager</code> 把 prompt 拆成 <code>prefix / memory / relevant_memory / history / current_request</code> 五段。</li>
+            <li>超预算时的压缩顺序明确为先砍 <code>relevant_memory</code>，再砍 <code>history</code>，最后才动更基础的 memory 和 prefix。</li>
+            <li>但这部分在 V2 里已经有框架，V3 更像细化和补强，不是新范式。</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="badge">安全与脱敏</span>
+          <h3>敏感信息识别覆盖更完整</h3>
+          <ul>
+            <li>V3 默认敏感变量名单纳入 <code>PICO_OPENAI_API_KEY</code>、<code>PICO_ANTHROPIC_API_KEY</code>、<code>PICO_DEEPSEEK_API_KEY</code>、<code>PICO_RIGHT_CODES_API_KEY</code> 等项目级变量。</li>
+            <li>项目 <code>.env</code> 会在 agent 装配前加载，这样 trace/report 的脱敏规则能及时生效。</li>
+            <li>这属于工程卫生改进，不算核心 agent 能力提升。</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="badge teal">运行可观测性</span>
+          <h3>trace/report 不只是记录结果，也能解释运行过程</h3>
+          <ul>
+            <li>V3 会记录 prompt cache 相关字段、resume 状态、stale 路径、runtime identity mismatch 字段。</li>
+            <li>context reduction、workspace mismatch、freshness mismatch、tool executed、run finished 等场景都能自动创建 checkpoint 并打 trace。</li>
+            <li>这提升了可调试性，但不直接代表 agent 更聪明或更强。</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <span class="badge gold">工程收敛</span>
+          <h3>实现方式更聚焦主产品</h3>
+          <ul>
+            <li>从 diff 结果看，V3 在核心包里是“边增强边收敛”的方向，不是无节制扩写。</li>
+            <li>本质上是收敛和整理，不是能力跃迁。</li>
+            <li>README、<code>.gitignore</code>、环境样例文件都更贴近真实使用场景。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>V3 明确新增的内容</h2>
+        <div class="hint">这些是“确实新增了”，但不等于都属于核心能力升级。</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>新增项</th>
+              <th>V3 具体内容</th>
+              <th>价值</th>
+              <th>代表位置</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DeepSeek Provider</td>
+              <td>新增 <code>deepseek</code> provider、默认模型 <code>deepseek-v4-pro</code>、默认 base URL <code>https://api.deepseek.com/anthropic</code>。</td>
+              <td>这是接入面扩展，不是 agent 内核升级。</td>
+              <td><code>pico/cli.py</code>、<code>README.md</code>、<code>tests/test_pico.py</code></td>
+            </tr>
+            <tr>
+              <td>项目级 <code>.env</code></td>
+              <td>新增 <code>.env.example</code>，支持 <code>PICO_OPENAI_*</code>、<code>PICO_ANTHROPIC_*</code>、<code>PICO_DEEPSEEK_*</code>。</td>
+              <td>属于使用成本优化。</td>
+              <td><code>.env.example</code>、<code>pico/config.py</code>、<code>.gitignore</code></td>
+            </tr>
+            <tr>
+              <td>Durable Memory</td>
+              <td>新增长期记忆存储：<code>.pico/memory/MEMORY.md</code> + <code>.pico/memory/topics/*.md</code>。</td>
+              <td>这是新增能力，但从代码看更像把 V2 的 memory 路线继续做完整。</td>
+              <td><code>pico/memory.py</code>、<code>pico/runtime.py</code></td>
+            </tr>
+            <tr>
+              <td>Checkpoint Taxonomy</td>
+              <td>新增恢复状态分类、runtime identity 比对、schema 版本检查、stale path 检查。</td>
+              <td>这是最值得保留的新增点，确实更影响实际连续工作。</td>
+              <td><code>pico/runtime.py</code>、<code>tests/test_pico.py</code></td>
+            </tr>
+            <tr>
+              <td>Prompt Cache Telemetry</td>
+              <td>V3 在 OpenAI-compatible 链路里记录 <code>cached_tokens</code>、<code>cache_hit</code>、<code>prompt_cache_key</code>。</td>
+              <td>偏观测和评测，不直接提升任务解决能力。</td>
+              <td><code>pico/models.py</code>、<code>pico/runtime.py</code>、<code>pico/metrics.py</code></td>
+            </tr>
+            <tr>
+              <td>Recovery / Context / Memory Ablation 补强</td>
+              <td>V3 的脚本和指标支持 real provider 里加入 DeepSeek，并对 recovery、prompt compression、memory hit rate 做更完整归档。</td>
+              <td>偏实验体系，不是主执行链路增强。</td>
+              <td><code>scripts/*.py</code>、<code>pico/metrics.py</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>核心判断</h2>
+        <div class="hint">按“它到底是不是更会做任务”来收缩结论。</div>
+      </div>
+      <div class="delta-grid">
+        <div class="card">
+          <h3>V2 已经具备的核心能力</h3>
+          <ul>
+            <li>能跑本地 coding agent。</li>
+            <li>有 OpenAI-compatible / Anthropic-compatible / Ollama 基础能力。</li>
+            <li>有 memory、context、trace、report、benchmark 的雏形。</li>
+            <li>resume、memory、context reduction、trace/report、benchmark 主骨架都已经在。</li>
+            <li>也就是说，V2 并不是“只有壳子”，核心思路其实已经写出来了。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>V3 相比 V2 的真实增量</h3>
+          <ul>
+            <li>最实在的增量是 checkpoint/resume 判定更细，恢复更稳。</li>
+            <li>其次是 durable memory 落盘做得更完整，但仍属于 memory 路线延长，不是全新能力层。</li>
+            <li>DeepSeek、PICO_*、cache telemetry、实验脚本都更像外围增强。</li>
+            <li>所以如果你的问题是“V3 有没有明显更强”，我的判断是没有特别明显。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>给你省时间的结论</h2>
+        <div class="hint">如果你现在只想抓重点，可以只看这 4 条。</div>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>1. 真正偏核心的提升：恢复可靠性</h3>
+          <p>如果你经常中断后继续任务，V3 的 checkpoint/resume 判定比 V2 更严格，这部分是最有实际意义的增强。</p>
+        </article>
+        <article class="card">
+          <h3>2. 次级增强：durable memory 更完整</h3>
+          <p>它让 memory 从工作记忆延伸到跨 session 落盘，但从能力性质上看仍是已有 memory 方向的延长。</p>
+        </article>
+        <article class="card">
+          <h3>3. 大部分其余变化不该高估</h3>
+          <p>DeepSeek、.env、cache 指标、脚本和报告，对工程使用有帮助，但不应该被解读成 agent 任务能力大幅变强。</p>
+        </article>
+        <article class="card">
+          <h3>4. 对你当前判断最重要的一句</h3>
+          <p>V2 的核心设计并不弱，V3 更多是把部分链路做得更稳、更细，而不是把核心范式重写了一遍。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>代表性源码锚点</h2>
+        <div class="hint">这些文件最能体现 V3 相比 V2 的升级方向。</div>
+      </div>
+      <div class="source-list">
+        <div class="source"><code>pico/config.py</code>：项目级 <code>.env</code> 发现与加载</div>
+        <div class="source"><code>pico/cli.py</code>：DeepSeek、PICO_*、agent 装配入口</div>
+        <div class="source"><code>pico/runtime.py</code>：checkpoint、resume、durable memory、prompt metadata</div>
+        <div class="source"><code>pico/memory.py</code>：durable topic store、freshness、召回融合</div>
+        <div class="source"><code>pico/context_manager.py</code>：relevant memory 与预算压缩策略</div>
+        <div class="source"><code>pico/models.py</code>：prompt cache telemetry、provider 适配</div>
+        <div class="source"><code>pico/metrics.py</code>：provider / recovery / memory / context 指标扩展</div>
+        <div class="source"><code>tests/test_pico.py</code>：DeepSeek、checkpoint、durable memory、cache hit 测试</div>
+        <div class="source"><code>tests/test_metrics.py</code>：DeepSeek 配置与 benchmark 指标回归测试</div>
+        <div class="source"><code>.env.example</code>：项目内配置模版</div>
+      </div>
+      <p class="footer">
+        收缩后的结论是：<strong>V3 有增量，但核心能力增量没有大到值得你转移很多注意力</strong>。
+        如果你现在只想抓最值钱的东西，优先看 <strong>resume/checkpoint</strong>，其次看 <strong>durable memory</strong>；其余大多属于外围工程整理。
+      </p>
+    </section>
+  </div>
+</body>
+</html>

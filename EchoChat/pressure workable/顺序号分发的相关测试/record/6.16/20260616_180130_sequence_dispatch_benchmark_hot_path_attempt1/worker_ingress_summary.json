@@ -1,0 +1,7 @@
+{
+  "window_ms": 20000.0,
+  "bin_ms": 1.0,
+  "worker_count": 2,
+  "total_series_rows": 40000,
+  "time_anchor_ms": 1781604124113.0
+}

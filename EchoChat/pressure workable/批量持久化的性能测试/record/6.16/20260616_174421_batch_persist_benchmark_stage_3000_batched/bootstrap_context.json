@@ -1,0 +1,8 @@
+{
+  "config_path": "/my_storage/czk/Personal/EchoChat/pressure workable/批量持久化的性能测试/record/generated_configs/stage_3000_batched.toml",
+  "bundle_dir": "/my_storage/czk/Personal/EchoChat/pressure workable/批量持久化的性能测试/record/6.16/20260616_174421_batch_persist_benchmark_stage_3000_batched",
+  "raw_dir": "/my_storage/czk/Personal/EchoChat/pressure workable/批量持久化的性能测试/record/6.16/20260616_174421_batch_persist_benchmark_stage_3000_batched/raw_runner",
+  "runtime_config_path": "/my_storage/czk/Personal/EchoChat/pressure workable/批量持久化的性能测试/record/6.16/20260616_174421_batch_persist_benchmark_stage_3000_batched/raw_runner/runtime_config.toml",
+  "mysql_runtime_root": "/my_storage/czk/Personal/EchoChat/runtime/mysql_isolated/20260616_174421_batch_persist_benchmark_stage_3000_batched",
+  "status": "packaged_00_13"
+}

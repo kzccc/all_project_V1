@@ -1,0 +1,54 @@
+RK3568 项目当前编译与发布流程
+
+1. 云服务器交叉编译
+
+在 RK 工程目录执行：
+
+```bash
+./scripts/build_in_docker.sh
+```
+
+脚本会使用 Docker 内的 Ubuntu 22.04 安装 aarch64 交叉编译器，并生成静态链接的 ARM64 程序：
+
+- output/lcd_demo
+- output/touch_test
+- output/camera_capture
+- output/vision_panel
+
+2. 发布到云服务器静态目录
+
+```bash
+./scripts/publish_static.sh
+```
+
+发布后板子可通过下面地址下载：
+
+- http://8.129.31.210/rk/lcd_demo
+- http://8.129.31.210/rk/touch_test
+- http://8.129.31.210/rk/camera_capture
+- http://8.129.31.210/rk/vision_panel
+
+3. 通过桥接让板子下载运行
+
+```bash
+./scripts/bridge_command.py 'cd /userdata/vision/bin && wget -O lcd_demo http://8.129.31.210/rk/lcd_demo && chmod +x lcd_demo && ./lcd_demo split'
+```
+
+相机优先用短探测命令，不要直接长时间采集：
+
+```bash
+./scripts/bridge_command.py 'cd /userdata/vision/bin && wget -O camera_capture http://8.129.31.210/rk/camera_capture && chmod +x camera_capture && ./camera_capture --probe /dev/video-camera0'
+```
+
+综合 LCD + 触摸演示：
+
+```bash
+./scripts/bridge_command.py 'cd /userdata/vision/bin && wget -O vision_panel http://8.129.31.210/rk/vision_panel && chmod +x vision_panel && ./vision_panel --seconds 10 /dev/input/event6'
+```
+
+4. 当前注意事项
+
+- 板端是 Buildroot，不要假设有 gcc/cmake/make。
+- BusyBox 的 hostname 不支持 `hostname -I`，用 `hostname -i`。
+- 目前主通道是云服务器桥接，不依赖 Windows 中转。
+- 如果桥接心跳离线，先确认板子网络/电源/自启客户端，再下发任务。

@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: EchoChat
+    orgId: 1
+    folder: EchoChat
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards

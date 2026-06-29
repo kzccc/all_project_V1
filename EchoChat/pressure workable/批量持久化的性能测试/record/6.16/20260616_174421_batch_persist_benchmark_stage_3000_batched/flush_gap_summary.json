@@ -1,0 +1,7 @@
+{
+  "full_batch_flush_count": 72,
+  "avg_gap_ms": 26.364,
+  "p50_gap_ms": 4.026,
+  "p95_gap_ms": 112.536,
+  "p99_gap_ms": 117.067
+}

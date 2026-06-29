@@ -1,0 +1,62 @@
+[mainConfig]
+appName = "your app name"
+host = "0.0.0.0"
+port = 8000
+
+[mysqlConfig]
+host = "127.0.0.1"
+port = 3306
+user = "root"
+password = "123456"
+databaseName = "your database name"
+
+[redisConfig]
+host = "127.0.0.1"
+port = 6379
+password = ""
+db = 0
+
+[authCodeConfig]
+accessKeyID = "your accessKeyID in alibaba cloud"
+accessKeySecret = "your accessKeySecret in alibaba cloud"
+signName = "阿里云短信测试"
+templateCode = "SMS_154950909"
+
+[logConfig]
+logPath = "./logs/echochat.log"
+
+[jwtConfig]
+accessExpireMinutes = 15
+refreshExpireHours = 168
+issuer = "EchoChat"
+subject = "user-auth"
+key = "change-me-echochat-jwt-secret"
+
+[kafkaConfig]
+messageMode = "channel"# 消息模式 channel or kafka
+hostPort = "127.0.0.1:9092" # "127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094" 多个kafka服务器
+loginTopic = "login"
+chatTopic = "chat_message"
+logoutTopic = "logout"
+consumerGroup = "chat" # Kafka 消费组名，便于多实例部署时统一管理消费进度
+messageKey = "chat" # session_id 为空时的兜底 key；正常情况下会优先使用 session_id 作为消息 key
+topicPartitions = 3 # CreateTopic 创建 chatTopic 时使用的分区数量；学习和观察分流效果时比 1 更直观
+topicReplicationFactor = 1 # CreateTopic 创建 chatTopic 时使用的副本因子；单 broker 建议 1，多 broker 建议 3
+partition = 0 # 兼容旧配置的遗留字段；未配置 messageKey 时会退回使用它生成 key
+timeout = 1 # 单位秒
+producerRetryMax = 3 # 生产端发送失败时的最大重试次数
+producerRetryBackoffMs = 200 # 生产端重试退避时间，单位毫秒
+minInsyncReplicas = 1 # 单 broker 环境建议为 1；多副本集群可按 ISR 策略提升
+consumerCommitBatchSize = 100 # 消费端累计多少条成功消息后提交一次 offset
+consumerCommitIntervalMs = 250 # 消费端最长多久提交一次 offset，单位毫秒
+mysqlPersistBatchSize = 64 # mysql_persist 批量写的批次大小
+mysqlPersistFlushIntervalMs = 1 # mysql_persist 批量写的最长等待时间，单位毫秒
+mysqlPersistWorkerCount = 8 # mysql_persist 批量写 worker 数量
+
+[staticSrcConfig]
+staticAvatarPath = "./static/avatars"
+staticFilePath = "./static/files"
+
+[observabilityConfig]
+enablePprof = false
+enableMetrics = true

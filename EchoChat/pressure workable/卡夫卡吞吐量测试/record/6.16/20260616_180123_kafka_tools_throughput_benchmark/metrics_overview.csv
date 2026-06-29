@@ -1,0 +1,4 @@
+test_name,primary_metric,secondary_metric,unit
+producer,249169.435216,243.33,"records/s,MB/s"
+consumer,238473.7679,232.8845,"records/s,MB/s"
+e2e,0.703,,ms

@@ -1,0 +1,373 @@
+我来提取这张图片中的文字内容。由于图片较长且包含大量代码，我将分段整理：
+
+---
+
+## 一、显示原理
+
+JPEG（Joint Photographic Experts Group）是一种广泛使用的有损压缩图像格式。与未压缩的BMP格式相比具有显著优势：
+
+- **BMP格式**：存储完整的未压缩图像数据，可直接显示但占用空间大
+- **JPEG格式**：采用有损压缩算法，在损失较少图像质量的前提下，大幅减小文件体积
+
+### 显示流程
+
+1. **JPEG文件 → libjpeg解码 → RGB数据 → 帧缓冲 → 显示屏**
+
+### 技术实现要点
+
+- 使用libjpeg库进行JPEG图像解码
+- 空闲时间策略：解码过程需要消耗存储空间等资源
+
+---
+
+## 二、移植流程
+
+### 1. 下载并解压libjpeg源码包（如 jpegsrc.v9b.tar.gz）
+
+```
+tar zxvf jpegsrc.v9b.tar.gz  # 解压到用户目录
+```
+
+### 2. 进入源码目录，配置并编译源码
+
+```bash
+cd jpeg-9b                    # 进入源码目录
+./configure --host=arm-linux --prefix=$HOME/libjpeg  # 配置编译参数
+make                          # 编译
+```
+
+**configure参数说明：**
+- `--host`：指定交叉编译生成的程序运行的平台
+- `--prefix`：安装路径
+
+### 3. 安装解压库到虚拟机
+
+```bash
+make install-strip
+```
+
+解压库安装到 `$HOME/libjpeg`
+
+### 4. 验证是否安装成功
+
+```bash
+file $HOME/libjpeg/lib/libjpeg.so.9.0.0
+```
+
+### 5. 打包上传开发板
+
+```bash
+cd ~/libjpeg
+tar zcvf libjpegarm.tar.gz lib bin
+```
+
+### 6. 解压压缩包到开发板（以下命令在开发板终端上执行）
+
+```bash
+tar zxvf libjpegarm.tar.gz -C /
+chmod +x bin/*
+```
+
+---
+
+## 三、代码实现
+
+### （一）前提准备
+
+```c
+#include <stdio.h>
+#include "jpeglib.h"
+#include "setjmp.h"
+```
+
+### （二）解压实现
+
+参考源代码进行常规解压流程（example.c）：
+
+```c
+/* 错误对象数据结构体 */
+struct my_error_mgr {
+    struct jpeg_error_mgr pub;  /* "public" fields */
+    jmp_buf setjmp_buffer;      /* for return to caller */
+};
+
+typedef struct my_error_mgr * my_error_ptr;
+
+/* Here's the routine that will replace the standard error_exit method: */
+METHODDEF(void)
+my_error_exit (j_common_ptr cinfo)
+{
+    /* cinfo->err really points to a my_error_mgr struct, so coerce pointer */
+    my_error_ptr myerr = (my_error_ptr) cinfo->err;
+
+    /* Always display the message. */
+    /* We could postpone this until after returning, if we chose. */
+    (*cinfo->err->output_message) (cinfo);
+
+    /* Return control to the setjmp point */
+    longjmp(myerr->setjmp_buffer, 1);
+}
+
+GLOBAL(int)
+read_JPEG_file (char * filename)
+{
+    /* This struct contains the JPEG decompression parameters and pointers to
+     * working space (which is allocated as needed by the JPEG library).
+     */
+    struct jpeg_decompress_struct cinfo;
+    /* We use our private extension JPEG error handler.
+     * Note that this struct must live as long as the main JPEG parameter
+     * struct, to avoid dangling-pointer problems.
+     */
+    struct my_error_mgr jerr;
+    /* More stuff */
+    FILE * infile;              /* source file */
+    JSAMPARRAY buffer;          /* Output row buffer */
+    int row_stride;             /* physical row width in output buffer */
+
+    /* In this example we want to open the input file before doing anything else,
+     * so that the setjmp() error recovery below can assume the file is open.
+     * VERY IMPORTANT: use "b" option to fopen() if you are on a machine that
+     * requires it in order to read binary files.
+     */
+    if ((infile = fopen(filename, "rb")) == NULL) {
+        fprintf(stderr, "couldn't open %s\n", filename);
+        return 0;
+    }
+
+    /* Step 1: allocate and initialize JPEG decompression object */
+    /* We set up the normal JPEG error routines, then override error_exit. */
+    cinfo.err = jpeg_std_error(&jerr.pub);
+    jerr.pub.error_exit = my_error_exit;
+    /* Establish the setjmp return context for my_error_exit to use. */
+    if (setjmp(jerr.setjmp_buffer)) {
+        /* If we get here, the JPEG code has signaled an error.
+         * We need to clean up the JPEG object, close the input file, and return.
+         */
+        jpeg_destroy_decompress(&cinfo);
+        fclose(infile);
+        return 0;
+    }
+    /* Now we can initialize the JPEG decompression object. */
+    jpeg_create_decompress(&cinfo);
+
+    /* Step 2: 指定解压图像数据源 */
+    jpeg_stdio_src(&cinfo, infile);
+
+    /* Step 3: 读取文件头数据 */
+    (void) jpeg_read_header(&cinfo, TRUE);
+    /* We can ignore the return value from jpeg_read_header since
+     *   (a) suspension is not possible with the stdio data source, and
+     *   (b) we passed TRUE to reject a tables-only JPEG file as an error.
+     * See libjpeg.txt for more info.
+     */
+
+    /* Step 4: 设置解压参数，可以直接使用默认的解压参数 */
+    /* In this example, we don't need to change any of the defaults set by
+     * jpeg_read_header(), so we do nothing here.
+     */
+
+    // unsigned int scale_num, scale_denom; /* 设定解压缩放比例 */
+    // cinfo.scale_num = 1; cinfo.scale_denom = 1; // 原尺寸
+    // cinfo.scale_num = 1; cinfo.scale_denom = 2; // 1/2尺寸
+
+    /* Step 5: 开始解压 */
+    (void) jpeg_start_decompress(&cinfo);
+    /* We can ignore the return value since suspension is not possible
+     * with the stdio data source.
+     */
+
+    /* We may need to do some setup of our own at this point before reading
+     * the data.  After jpeg_start_decompress() we have the correct scaled
+     * output image dimensions available, as well as the output colormap
+     * if we asked for color quantization.
+     * In this example, we need to make an output work buffer of the right size.
+     */
+
+    /* 计算数据大小 */
+    row_stride = cinfo.output_width * cinfo.output_components;
+    /* 一行数据的存储缓冲区 */
+    buffer = (*cinfo.mem->alloc_sarray)
+        ((j_common_ptr) &cinfo, JPOOL_IMAGE, row_stride, 1);
+
+    /* Step 6: 循环读取每一行数据 */
+    /* Here we use the library's state variable cinfo.output_scanline as the
+     * loop counter, so that we don't have to keep track ourselves.
+     */
+    while (cinfo.output_scanline < cinfo.output_height) {
+        /* jpeg_read_scanlines expects an array of pointers to scanlines.
+         * Here the array is only one element long, but you could ask for
+         * more than one scanline at a time if that's more convenient.
+         */
+        (void) jpeg_read_scanlines(&cinfo, buffer, 1);
+        /* 需要将每行的数据拷贝至整个图像缓冲区，在读取每一行时 */
+        // memcpy(dst, buffer[0], row_stride);
+        // dst += row_stride;
+    }
+
+    /* Step 7: 解压完成 */
+    (void) jpeg_finish_decompress(&cinfo);
+    /* We can ignore the return value since suspension is not possible
+     * with the stdio data source.
+     */
+
+    /* Step 8: 释放资源 */
+    /* This is an important step since it will release a good deal of memory. */
+    jpeg_destroy_decompress(&cinfo);
+
+    /* After finish_decompress, we can close the input file.
+     * Here we postpone it until after no more JPEG errors are possible,
+     * so as to simplify the setjmp error logic above.  (Actually, I don't
+     * think that jpeg_destroy can do an error exit, but why assume anything...)
+     */
+    fclose(infile);
+
+    /* At this point you may want to check to see whether any corrupt-data
+     * warnings occurred (test whether jerr.pub.num_warnings is nonzero).
+     */
+
+    /* And we're done! */
+    return 1;
+}
+```
+
+以上操作实现只是解压数据出来而已，而我们要做的事情是将buffer一行的数据存储在由整个图像数据大小的缓冲区out_buffer中，可更改为：
+
+```c
+GLOBAL(int) read_JPEG_file (char * filename, int *image_width, int *image_height, char **out_buffer)
+{
+    // ...
+    
+    /* Step 3: 读取文件头数据 */
+    (void) jpeg_read_header(&cinfo, TRUE);
+    *image_width = cinfo.image_width;
+    *image_height = cinfo.image_height;
+    
+    row_stride = cinfo.output_width * cinfo.output_components;
+    *out_buffer = calloc(1, row_stride * cinfo.image_height);
+    char *dst = *out_buffer;
+    
+    while (cinfo.output_scanline < cinfo.output_height) {
+        (void) jpeg_read_scanlines(&cinfo, buffer, 1);
+        /* 需要将每行的数据拷贝至整个图像缓冲区，在读取每一行时 */
+        memcpy(dst, buffer[0], row_stride);
+        dst += row_stride;
+    }
+    
+    // ...
+}
+```
+
+### （三）缓冲显示
+
+```c
+void rgb_to_lcd(char *jpeg_buffer, int width, int height, int x, int y)
+{
+    int i, j;
+    
+    for (j = 0; j < height; j++)
+    {
+        for (i = 0; i < width; i++)
+        {
+            r = jpeg_buffer[(width * j + i) * 3 + 0];
+            g = jpeg_buffer[(width * j + i) * 3 + 1];
+            b = jpeg_buffer[(width * j + i) * 3 + 2];
+            color = r << 16 | g << 8 | b;
+            
+            lcd_draw_point(x + i, y + j, color);
+        }
+    }
+}
+```
+
+利用子函数和函数指针实现多态调用（随机数+函数指针时间）：
+
+```c
+int lcd_draw_jpg(const char *pathname, int x, int y)
+{
+    int image_width, image_height;
+    char *out_buffer;
+    
+    read_JPEG_file(pathname, &image_width, &image_height, &out_buffer);
+    // 可以根据多种图片显示特效，利用回调函数进行实现
+    rgb_to_lcd(out_buffer, image_width, image_height, x, y);
+    
+    free(out_buffer);
+}
+```
+
+```c
+// 函数指针类型
+typedef void(*func)(const char *, int, int, int, int);
+
+// 1. 函数原型
+void func1(const char *pathname, int width, int height, int x, int y);
+void func2(const char *pathname, int width, int height, int x, int y);
+void func3(const char *pathname, int width, int height, int x, int y);
+
+// 2. 函数指针数组 存储带参数的函数处理函数
+func funcs[] = {
+    func1,
+    func2,
+    func3
+};
+
+int main(void)
+{
+    // b.1. 设置随机数种子
+    srand48(time(NULL));
+    
+    while(1)
+    {
+        // b.2. 生成 0-2 的随机数
+        int num = rand() % 3;
+        printf("随机数: %d\n", num);
+        
+        // 3. 用随机数作为下标，调用对应函数，当前形参未实际使用，传入占位参数即可
+        funcs[num](NULL, 0, 0, 0, 0);
+    }
+}
+```
+
+---
+
+## 四、编译生成程序
+
+```bash
+arm-linux-gcc pic.c -o pic -I ~/libjpeg/include -L ~/libjpeg/lib -ljpeg
+```
+
+- `-I`：指定头文件所在路径
+- `-L`：指定库文件所在路径
+- `-l`：指明程序需要使用的库文件
+
+---
+
+## 五、测试效果
+
+### 1. 上传程序、素材、库到开发板，运行程序
+
+```bash
+mount /dev/sda4 /mnt/disk
+cp /mnt/disk/pic ./
+chmod +x pic
+./pic
+```
+
+### 2. 按不同特效轮流显示图片
+
+```c
+lcd_draw_jpg("1.jpg", 0, 0); usleep(1000);
+lcd_draw_jpg("2.jpg", 0, 0); usleep(1000);
+lcd_draw_jpg("3.jpg", 0, 0); usleep(1000);
+lcd_draw_jpg("4.jpg", 0, 0); usleep(1000);
+lcd_draw_jpg("5.jpg", 0, 0); usleep(1000);
+lcd_draw_jpg("6.jpg", 0, 0); usleep(1000);
+lcd_draw_jpg("7.jpg", 0, 0); usleep(1000);
+```
+
+利用回调函数和随机数实现不同显示特效
+
+---
+
+以上就是图片中包含的全部文字内容。主要涉及**libjpeg库在嵌入式Linux开发板上的移植**以及**JPEG图像解码显示**的完整流程。

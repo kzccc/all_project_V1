@@ -1,0 +1,29 @@
+{
+  "scenario": "single",
+  "mode": "channel-smoke",
+  "run_id": "channel-smoke-single-1774845629",
+  "pair_count": 1,
+  "messages_per_sender": 2,
+  "send_interval_ms": 50,
+  "expected_messages": 2,
+  "received_messages": 2,
+  "delivery_success_rate": 1.0,
+  "duration_sec": 0.329,
+  "observed_throughput_msg_per_sec": 6.084,
+  "latency": {
+    "count": 2,
+    "avg_ms": 10.5,
+    "p50_ms": 10.5,
+    "p95_ms": 10.95,
+    "p99_ms": 10.99,
+    "max_ms": 11
+  },
+  "server_resource_peak": {
+    "samples": 3,
+    "rss_peak_mb": 26.996,
+    "threads_peak": 17,
+    "fd_peak": 17
+  },
+  "started_at_unix": 1774845629,
+  "finished_at_unix": 1774845630
+}

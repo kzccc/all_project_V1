@@ -1,0 +1,50 @@
+[run]
+label = "kafka_tools_throughput_benchmark"
+report_root = "pressure workable/卡夫卡吞吐量测试/reports"
+record_root = "pressure workable/卡夫卡吞吐量测试/record"
+kafka_home = "deploy/kafka5/runtime/dist/kafka_2.13-3.9.2"
+
+[broker]
+host = "127.0.0.1"
+port = 39092
+controller_port = 39093
+cluster_id = "6fRjQ5QqQ5i1a7Jm8yN2Kg"
+heap_opts = "-Xms256m -Xmx256m"
+num_partitions = 24
+log_retention_hours = 24
+socket_request_max_bytes = 104857600
+
+[producer]
+topic = "kafka_perf_producer"
+partitions = 24
+replication_factor = 1
+num_records = 300000
+record_size = 1024
+throughput = -1
+acks = "1"
+batch_size = 131072
+linger_ms = 5
+compression_type = "lz4"
+buffer_memory = 268435456
+client_id = "perf-producer"
+
+[consumer]
+topic = "kafka_perf_consumer"
+partitions = 24
+replication_factor = 1
+seed_records = 300000
+record_size = 1024
+fetch_size = 1048576
+messages = 300000
+timeout = 30000
+threads = 1
+group = "perf-consumer"
+
+[e2e]
+topic = "kafka_perf_e2e"
+partitions = 12
+replication_factor = 1
+num_messages = 2000
+acks = "1"
+message_size = 1024
+

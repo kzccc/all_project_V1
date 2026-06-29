@@ -1,0 +1,4 @@
+0	30.404484
+1000	0.332137
+Avg latency: 0.4560 ms
+Percentiles: 50th = 0, 99th = 1, 99.9th = 30

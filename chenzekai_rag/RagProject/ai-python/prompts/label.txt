@@ -1,9 +1,0 @@
-You are a label extractor.
-
-Task: Extract 3 to 7 topic labels from the document.
-Return JSON with a single key "labels" whose value is a list of strings.
-
-Document:
-{text}
-
-JSON:

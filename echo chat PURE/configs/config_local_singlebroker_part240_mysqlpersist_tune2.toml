@@ -1,0 +1,73 @@
+[mainConfig]
+appName = "EchoChat"
+host = "127.0.0.1"
+port = 8081
+
+[mysqlConfig]
+host = "127.0.0.1"
+port = 3306
+user = "root"
+password = ""
+databaseName = "echochat"
+maxOpenConns = 500
+maxIdleConns = 100
+connMaxLifetimeMinutes = 30
+connMaxIdleTimeMinutes = 10
+
+[redisConfig]
+host = "127.0.0.1"
+port = 6379
+password = ""
+db = 0
+
+[authCodeConfig]
+accessKeyID = ""
+accessKeySecret = ""
+signName = "阿里云短信测试"
+templateCode = "SMS_154950909"
+
+[logConfig]
+logPath = "./logs/echochat.log"
+level = "info"
+disableStdout = true
+
+[jwtConfig]
+accessExpireMinutes = 60
+refreshExpireHours = 168
+issuer = "EchoChat"
+subject = "user-auth"
+key = "58c89e18c2a896b83557f336adcfdbc1189818de23ad564615e3cd0dffc25d37"
+
+[kafkaConfig]
+messageMode = "kafka"
+hostPort = "127.0.0.1:9092"
+loginTopic = "login"
+chatTopic = "chat_message_singlebroker_part240_tune2"
+logoutTopic = "logout"
+consumerGroup = "chat_singlebroker_part240_tune2"
+messageKey = "chat"
+topicPartitions = 240
+topicReplicationFactor = 1
+partition = 1
+timeout = 1
+producerRetryMax = 3
+producerRetryBackoffMs = 200
+minInsyncReplicas = 1
+consumerCommitBatchSize = 100
+consumerCommitIntervalMs = 250
+mysqlPersistBatchSize = 256
+mysqlPersistFlushIntervalMs = 5
+mysqlPersistWorkerCount = 32
+
+[staticSrcConfig]
+staticAvatarPath = "./static/avatars"
+staticFilePath = "./static/files"
+
+[pressureTestConfig]
+enableBenchmarkRoutes = true
+disableBenchmarkRequestLog = true
+disableBenchmarkHotPathLog = true
+
+[observabilityConfig]
+enablePprof = true
+enableMetrics = true

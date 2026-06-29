@@ -1,0 +1,41 @@
+{
+  "scenario": "group",
+  "mode": "channel-smoke",
+  "run_id": "channel-smoke-group-1774845700",
+  "group_id": "GK600000000000000001",
+  "group_name": "k6_group_001",
+  "group_member_count": 5,
+  "receiver_count": 4,
+  "messages_per_sender": 2,
+  "send_interval_ms": 80,
+  "expected_receipts": 8,
+  "received_receipts": 8,
+  "delivery_coverage_rate": 1.0,
+  "full_coverage_message_rate": 1.0,
+  "duration_sec": 0.475,
+  "observed_delivery_per_sec": 16.847,
+  "receipt_latency": {
+    "count": 8,
+    "avg_ms": 6.0,
+    "p50_ms": 6.0,
+    "p95_ms": 7.0,
+    "p99_ms": 7.0,
+    "max_ms": 7
+  },
+  "broadcast_completion_latency": {
+    "count": 2,
+    "avg_ms": 6.0,
+    "p50_ms": 6.0,
+    "p95_ms": 6.9,
+    "p99_ms": 6.98,
+    "max_ms": 7
+  },
+  "server_resource_peak": {
+    "samples": 4,
+    "rss_peak_mb": 26.996,
+    "threads_peak": 18,
+    "fd_peak": 24
+  },
+  "started_at_unix": 1774845700,
+  "finished_at_unix": 1774845700
+}

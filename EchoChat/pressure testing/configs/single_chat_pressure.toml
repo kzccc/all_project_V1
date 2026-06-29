@@ -1,0 +1,134 @@
+[run]
+label_mode = "auto" # 目录名模式，auto 表示按当前配置自动生成，manual 才读取下面的 label
+label = "" # manual 模式下使用的目录标签；auto 模式下可留空
+label_suffix = "" # auto 模式下可选附加后缀，留空则不追加
+report_layout = "bundle" # 报告布局模式；固定为 bundle，表示产物落到 pressure testing/record/<月.日>/<本轮目录>/ 下
+base_config = "configs/config_local_singlebroker_part240_mysqlpersist_tune2.toml" # 作为模板复制的后端基础配置文件
+seed_prefix = "PT7500ASYNC" # 造数账号和会话使用的前缀，避免与其他批次冲突
+record_root = "pressure testing/record" # 压测结果输出根目录；脚本会自动在下面再创建当天的 <月.日> 子目录
+mysql_runtime_root = "./runtime/mysql_isolated" # 压测使用的独立 MySQL 运行时目录
+database = "echochat_pressure_default" # 默认压测使用的独立数据库名，避免复用历史很重的 echochat 主库
+
+[mainconfig]
+target_rate = 10000 # 挡位，单位为消息每秒
+session_count = 1000 # 本轮实际参与压测的单聊会话数
+topic_partitions = 10 # 聊天 topic 分区数
+conversation_bucket_worker_count = 50 # 每个 Kafka 分区内部固定 worker pool 的 worker 数
+conversation_bucket_ready_queue_size = 1024 # 每个 Kafka 分区内部 ready queue 的缓冲长度
+conversation_bucket_bucket_queue_size = 1024 # 每个 conversation bucket 内部消息队列上限
+conversation_bucket_max_messages_per_turn = 16 # 单个 worker 单次从同一个 conversation bucket 连续处理的最大消息数
+conversation_bucket_max_run_duration_ms = 100000000 # 单个 worker 单次从同一个 conversation bucket 连续处理的最长时间，单位为毫秒
+mysql_persist_worker_count = 1 # mysql_persist worker 数量
+mysql_persist_batch_size = 300 # mysql_pe、rsist 批量写入的单批大小
+
+[conversation_bucket]
+enabled = true # 是否启用 partition -> conversation bucket -> ready queue -> worker pool 实验路径
+worker_count = 20 # 每个 Kafka 分区内部固定 worker pool 的 worker 数
+ready_queue_size = 1024 # 每个 Kafka 分区内部 ready queue 的缓冲长度
+bucket_queue_size = 1024 # 每个 conversation bucket 内部消息队列上限
+max_messages_per_turn = 1 # 单个 worker 单次从同一个 conversation bucket 连续处理的最大消息数
+max_run_duration_ms = 1 # 单个 worker 单次从同一个 conversation bucket 连续处理的最长时间，单位为毫秒
+drain_timeout_ms = 3000 # claim 结束时等待 conversation bucket 路径在途任务 drain 的最长时间，单位为毫秒
+
+[scenario]
+session_count = 400 # 兼容旧配置；若 [mainconfig] 存在则以 mainconfig.session_count 为准
+fixture_pair_count = 4800 # 预生成的单聊用户对数量
+user_count = 1600 # seed 阶段生成的用户数量，用于支撑大规模不重复会话挑选
+target_rate = 10000 # 兼容旧配置；若 [mainconfig] 存在则以 mainconfig.target_rate 为准
+duration_sec = 20 # 正式施压持续时间，单位为秒
+max_messages = 0 # 消息总上限，0 表示仅按持续时间控制
+partition_selection_mode = "balanced" # 分区选择策略，balanced 表示尽量均衡打散
+session_partition_balance_mode = "on" # 是否强制把最终选中的会话尽量均衡控制到每个目标 Kafka 分区；若 worker_balance_mode 也为 on，则两者同时满足
+worker_balance_mode = "off" # 消费 worker 均衡模式，off 表示关闭额外均衡控制；若分区内二次并发开启，仍然会在单 worker 内做会话 shard 并发
+
+[consumers]
+count = 1 # 启动的消费者实例数量
+base_port = 18082 # 自动分配消费者端口时的起始端口
+ports = "18082" # 显式指定的消费者服务端口列表
+client_ports = "18082" # 压测客户端连接使用的服务端口列表
+
+[kafka]
+broker_count = 1 # 参与本轮压测的 Kafka broker 数量
+host_port = "127.0.0.1:9092" # Kafka bootstrap server 地址列表
+login_topic = "login" # 登录事件 topic 名称
+logout_topic = "logout" # 登出事件 topic 名称
+chat_topic_prefix = "chat_message_pressure_single" # 本轮聊天 topic 的前缀
+unique_topic_per_run = true # 是否为每轮压测创建独立 topic
+topic_partitions = 10 # 兼容旧配置；若 [mainconfig] 存在则以 mainconfig.topic_partitions 为准
+topic_replication_factor = 1 # 聊天 topic 副本因子
+message_key = "chat" # 兜底消息 key，用于未命中业务 key 时的分区路由
+partition_fallback = 1 # 兼容旧逻辑的回退分区号
+timeout_sec = 1 # Kafka 网络超时，单位为秒
+producer_retry_max = 3 # 生产端最大重试次数
+producer_retry_backoff_ms = 200 # 生产端重试退避时间，单位为毫秒
+min_insync_replicas = 1 # topic 要求的最小 ISR 副本数
+
+[mysql]
+host = "127.0.0.1" # MySQL 主机地址
+port = 33306 # MySQL 监听端口
+user = "root" # MySQL 用户名
+password = "" # MySQL 密码
+database_name = "echochat_pressure_default" # 压测目标数据库名
+max_open_conns = 500 # 连接池最大打开连接数
+max_idle_conns = 100 # 连接池最大空闲连接数
+conn_max_lifetime_minutes = 30 # 单连接最大生命周期，单位为分钟
+conn_max_idle_time_minutes = 10 # 单连接最大空闲时间，单位为分钟
+
+[redis]
+host = "127.0.0.1" # Redis 主机地址
+port = 6379 # Redis 端口
+password = "" # Redis 密码
+db = 0 # Redis 数据库编号
+
+[commit]
+batch_size = 400 # Kafka offset 批量提交阈值
+interval_ms = 250 # Kafka offset 最长提交间隔，单位为毫秒
+
+[persist]
+batch_size = 100 # 兼容旧配置；若 [mainconfig] 存在则以 mainconfig.mysql_persist_batch_size 为准
+first_job_hold_ms = 300 # 首条消息进入批次后的额外等待时间，单位为毫秒
+flush_interval_ms = 300 # 批次最长 flush 等待时间，单位为毫秒
+worker_count = 1 # 兼容旧配置；若 [mainconfig] 存在则以 mainconfig.mysql_persist_worker_count 为准
+queue_size = 4096 # 每个 mysql_persist worker 的队列容量
+session_seq_redis_only_experimental = false # 是否启用仅依赖 Redis 的 session_seq 实验开关
+mysql_persist_noop_experimental = false # 是否跳过真实 MySQL 持久化的实验开关
+group_async_pipeline_experimental = false # 是否启用群聊异步 pipeline 实验开关
+group_async_shard_count = 1 # 群聊异步 pipeline 的分片数
+
+[status]
+status_update_noop_experimental = false # 是否跳过消息 sent 状态更新的实验开关
+
+[partition_async]
+enabled = false # 是否启用 Kafka 分区内 dispatcher + 会话分片 worker 实验路径
+shard_count = 20 # 兼容旧配置；当前主口径以 conversation_bucket 为主，这里仅在显式启用 partition_async 时生效
+queue_size = 512 # 每个 Kafka 分区内部每个 shard 队列的缓冲长度
+drain_timeout_ms = 3000 # claim 结束时等待分区内在途任务 drain 的最长时间，单位为毫秒
+
+[benchmark]
+message_timeout_ms = 60000 # 单条消息等待送达的超时时间，单位为毫秒
+setup_workers = 0 # login/openSession 预热阶段的最大并发数，0 表示按候选会话数自动推导
+setup_http_timeout_ms = 0 # login/openSession 这类预热 HTTP 请求的超时时间，单位为毫秒，0 表示按候选会话数自动推导
+connection_settle_ms = 1500 # 建连完成后的预热等待时间，单位为毫秒
+session_seq_warmup_enabled = true # 是否在正式压测前给每个会话先发 1 条消息预热 session_seq
+session_seq_warmup_interval_ms = 10 # session_seq 预热消息的发送间隔，避免所有会话同时预热
+session_seq_warmup_timeout_ms = 15000 # session_seq 预热阶段等待消息真正完成送达的最长时间
+session_seq_warmup_settle_ms = 1000 # session_seq 预热完成后额外等待链路稳定的时间
+drain_wait_ms = 5000 # 施压结束后等待链路排空的总时长，单位为毫秒
+drain_idle_ms = 1000 # 判定链路空闲的连续静默时间，单位为毫秒
+post_run_settle_ms = 1000 # 压测结束后额外稳定等待时间，单位为毫秒
+ws_path = "/bench/wss" # 压测专用 WebSocket 路径
+seed_reset_prefix = true # 压测前是否清理同前缀历史造数数据
+
+[logging]
+level = "info" # 压测期间后端日志级别
+disable_stdout = true # 是否关闭标准输出日志
+disable_benchmark_request_log = true # 是否关闭压测请求日志
+disable_benchmark_hot_path_log = true # 是否关闭压测热路径日志
+
+[cleanup]
+delete_legacy_redis_pressure_keys_before_run = false # 每轮开始前是否清理历史 Redis 测压 key
+delete_current_redis_pressure_keys = true # 本轮完成后是否清理当前 seed_prefix 对应的 Redis 测压 key
+delete_raw_runner = false # 完成后是否删除 raw_runner 中间产物
+delete_generated_dir = false # 完成后是否删除 generated 中间配置产物
+delete_mysql_runtime_dir = true # 完成后是否删除隔离 MySQL 运行时目录
+delete_bundle_after_finish = false # 完成并拿到结果后是否删除本轮 bundle 目录；false 时保留 record 下最终结果

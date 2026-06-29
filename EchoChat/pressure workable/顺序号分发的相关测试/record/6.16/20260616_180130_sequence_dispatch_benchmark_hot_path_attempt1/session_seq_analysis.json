@@ -1,0 +1,620 @@
+{
+  "total_session_seq_samples": 48000,
+  "mode_summary": {
+    "cold_start": {
+      "count": 0,
+      "avg_ms": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "max_ms": null
+    },
+    "hot_path": {
+      "count": 48000,
+      "avg_ms": 0.034,
+      "p50_ms": 0.026,
+      "p95_ms": 0.049,
+      "p99_ms": 0.092,
+      "max_ms": 10.315
+    },
+    "redis_floor_recovery": {
+      "count": 0,
+      "avg_ms": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "max_ms": null
+    },
+    "unknown": {
+      "count": 0,
+      "avg_ms": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "max_ms": null
+    }
+  },
+  "mode_order": [
+    "cold_start",
+    "hot_path",
+    "redis_floor_recovery"
+  ],
+  "reasonableness": {
+    "unreasonable": true,
+    "findings": [
+      "redis_floor_recovery 样本数偏少，仅 0"
+    ]
+  },
+  "top_outliers": {
+    "hot_path": [
+      {
+        "bench_id": "pressure-single-1781604121-single-004-001",
+        "seq_mode": "hot_path",
+        "duration_ms": 0.766535,
+        "partition": 8,
+        "offset": 60,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-035-004",
+        "seq_mode": "hot_path",
+        "duration_ms": 0.425453,
+        "partition": 5,
+        "offset": 153,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-109-005",
+        "seq_mode": "hot_path",
+        "duration_ms": 2.689472,
+        "partition": 6,
+        "offset": 190,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-110-005",
+        "seq_mode": "hot_path",
+        "duration_ms": 2.585524,
+        "partition": 3,
+        "offset": 191,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-078-006",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.009312,
+        "partition": 3,
+        "offset": 217,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-035-006",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.418019,
+        "partition": 5,
+        "offset": 213,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-112-006",
+        "seq_mode": "hot_path",
+        "duration_ms": 0.680382,
+        "partition": 1,
+        "offset": 221,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-055-006",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.222773,
+        "partition": 5,
+        "offset": 215,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-133-006",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.435126,
+        "partition": 2,
+        "offset": 223,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-162-006",
+        "seq_mode": "hot_path",
+        "duration_ms": 0.926604,
+        "partition": 1,
+        "offset": 226,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-126-006",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.060329,
+        "partition": 8,
+        "offset": 222,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-094-006",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.030172,
+        "partition": 7,
+        "offset": 219,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-130-006",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.050627,
+        "partition": 8,
+        "offset": 223,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-123-008",
+        "seq_mode": "hot_path",
+        "duration_ms": 0.41901,
+        "partition": 3,
+        "offset": 282,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-110-010",
+        "seq_mode": "hot_path",
+        "duration_ms": 0.816707,
+        "partition": 3,
+        "offset": 340,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-185-016",
+        "seq_mode": "hot_path",
+        "duration_ms": 3.874866,
+        "partition": 5,
+        "offset": 528,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-122-025",
+        "seq_mode": "hot_path",
+        "duration_ms": 0.410443,
+        "partition": 5,
+        "offset": 793,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-166-029",
+        "seq_mode": "hot_path",
+        "duration_ms": 0.49148,
+        "partition": 7,
+        "offset": 916,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-245-037",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.00491,
+        "partition": 9,
+        "offset": 1164,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604121-single-258-037",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.033885,
+        "partition": 4,
+        "offset": 1165,
+        "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+      }
+    ]
+  },
+  "raw_mode_counts": {
+    "cold_start": 0,
+    "hot_path": 48000,
+    "redis_floor_recovery": 0,
+    "unknown": 0
+  },
+  "sorted_mode_rows_preview": [
+    {
+      "bench_id": "pressure-single-1781604121-single-200-121",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013051,
+      "partition": 7,
+      "offset": 3676,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-226-039",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013248,
+      "partition": 4,
+      "offset": 1224,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-076-097",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013362,
+      "partition": 2,
+      "offset": 2947,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-138-002",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013566,
+      "partition": 9,
+      "offset": 103,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-133-008",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013662,
+      "partition": 2,
+      "offset": 283,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-226-031",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013664,
+      "partition": 4,
+      "offset": 982,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-164-005",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.0137,
+      "partition": 4,
+      "offset": 196,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-178-005",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013757,
+      "partition": 3,
+      "offset": 197,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-130-025",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013758,
+      "partition": 8,
+      "offset": 793,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-168-121",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013766,
+      "partition": 9,
+      "offset": 3681,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-067-003",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013786,
+      "partition": 5,
+      "offset": 126,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-021-152",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013905,
+      "partition": 2,
+      "offset": 4593,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-235-039",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013945,
+      "partition": 9,
+      "offset": 1224,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-282-008",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013947,
+      "partition": 7,
+      "offset": 298,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-180-121",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013993,
+      "partition": 9,
+      "offset": 3680,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-129-002",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014033,
+      "partition": 9,
+      "offset": 102,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-189-005",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014049,
+      "partition": 7,
+      "offset": 198,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-081-032",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014074,
+      "partition": 0,
+      "offset": 998,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-021-050",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014086,
+      "partition": 2,
+      "offset": 1532,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-008-003",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.01414,
+      "partition": 3,
+      "offset": 120,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-230-031",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.01417,
+      "partition": 4,
+      "offset": 983,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-210-121",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014195,
+      "partition": 7,
+      "offset": 3678,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-097-152",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014198,
+      "partition": 2,
+      "offset": 4598,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-077-001",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014291,
+      "partition": 9,
+      "offset": 67,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-169-121",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014301,
+      "partition": 8,
+      "offset": 3680,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-216-020",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014351,
+      "partition": 8,
+      "offset": 651,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-097-097",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014374,
+      "partition": 2,
+      "offset": 2949,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-072-032",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014446,
+      "partition": 7,
+      "offset": 997,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-240-031",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014479,
+      "partition": 8,
+      "offset": 985,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-079-002",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014517,
+      "partition": 5,
+      "offset": 97,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-127-009",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014581,
+      "partition": 7,
+      "offset": 312,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-076-004",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.0146,
+      "partition": 2,
+      "offset": 157,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-064-152",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014613,
+      "partition": 2,
+      "offset": 4597,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-111-008",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014628,
+      "partition": 0,
+      "offset": 281,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-195-097",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014708,
+      "partition": 7,
+      "offset": 2959,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-141-121",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014708,
+      "partition": 4,
+      "offset": 3673,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-208-121",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014708,
+      "partition": 8,
+      "offset": 3683,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-131-004",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014713,
+      "partition": 4,
+      "offset": 163,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-166-121",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014717,
+      "partition": 7,
+      "offset": 3684,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-247-031",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014733,
+      "partition": 2,
+      "offset": 984,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-119-005",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014747,
+      "partition": 8,
+      "offset": 191,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-105-152",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.01475,
+      "partition": 1,
+      "offset": 4600,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-089-003",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014785,
+      "partition": 1,
+      "offset": 128,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-118-003",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.01481,
+      "partition": 2,
+      "offset": 131,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-151-010",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014822,
+      "partition": 2,
+      "offset": 345,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-154-121",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014824,
+      "partition": 1,
+      "offset": 3685,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-017-136",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014846,
+      "partition": 1,
+      "offset": 4111,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-238-037",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014871,
+      "partition": 5,
+      "offset": 1163,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-233-031",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014877,
+      "partition": 6,
+      "offset": 985,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604121-single-168-020",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014888,
+      "partition": 9,
+      "offset": 646,
+      "topic": "chat_message_sequence_dispatch_hot_path_20260616_180130_sequence_dispatch_benchmark_hot_path_attempt1"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+[mainConfig]
+appName = "EchoChat"
+host = "127.0.0.1"
+port = 18082
+
+[mysqlConfig]
+host = "127.0.0.1"
+port = 33306
+user = "root"
+password = ""
+databaseName = "echochat_sequence_dispatch_bench"
+maxOpenConns = 500
+maxIdleConns = 100
+connMaxLifetimeMinutes = 30
+connMaxIdleTimeMinutes = 10
+
+[redisConfig]
+host = "127.0.0.1"
+port = 6379
+password = ""
+db = 0
+
+[authCodeConfig]
+accessKeyID = ""
+accessKeySecret = ""
+signName = "阿里云短信测试"
+templateCode = "SMS_154950909"
+
+[logConfig]
+logPath = "./logs/echochat.log"
+level = "info"
+disableStdout = true
+
+[jwtConfig]
+accessExpireMinutes = 60
+refreshExpireHours = 168
+issuer = "EchoChat"
+subject = "user-auth"
+key = "58c89e18c2a896b83557f336adcfdbc1189818de23ad564615e3cd0dffc25d37"
+
+[kafkaConfig]
+messageMode = "kafka"
+hostPort = "127.0.0.1:9092"
+loginTopic = "login"
+chatTopic = "chat_message_sequence_dispatch_cold_start_20260616_180017_sequence_dispatch_benchmark_cold_start_attempt1"
+logoutTopic = "logout"
+consumerGroup = "chat_pressure_20260616_180017_sequence_dispatch_benchmark_cold_start_attempt1"
+messageKey = "chat"
+topicPartitions = 10
+topicReplicationFactor = 1
+partition = 1
+timeout = 1
+producerRetryMax = 3
+producerRetryBackoffMs = 200
+minInsyncReplicas = 1
+consumerCommitBatchSize = 400
+consumerCommitIntervalMs = 250
+mysqlPersistBatchSize = 300
+mysqlPersistFlushIntervalMs = 7
+mysqlPersistWorkerCount = 2
+mysqlPersistFirstJobHoldMs = 0.5
+mysqlPersistQueueSize = 4096
+sessionSeqRedisOnlyExperimental = false
+mysqlPersistNoopExperimental = false
+partitionAsyncEnabled = false
+partitionAsyncShardCount = 20
+partitionAsyncQueueSize = 512
+partitionAsyncDrainTimeoutMs = 3000
+conversationBucketEnabled = true
+conversationBucketWorkerCount = 20
+conversationBucketReadyQueueSize = 1024
+conversationBucketQueueSize = 1024
+conversationBucketMaxMessagesPerTurn = 1
+conversationBucketMaxRunDurationMs = 1
+conversationBucketDrainTimeoutMs = 3000
+
+[staticSrcConfig]
+staticAvatarPath = "./static/avatars"
+staticFilePath = "./static/files"
+
+[pressureTestConfig]
+enableBenchmarkRoutes = true
+disableBenchmarkRequestLog = true
+disableBenchmarkHotPathLog = true
+
+[observabilityConfig]
+enablePprof = true
+enableMetrics = true

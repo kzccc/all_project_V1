@@ -1,0 +1,638 @@
+{
+  "total_session_seq_samples": 48000,
+  "mode_summary": {
+    "cold_start": {
+      "count": 0,
+      "avg_ms": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "max_ms": null
+    },
+    "hot_path": {
+      "count": 47700,
+      "avg_ms": 0.037,
+      "p50_ms": 0.025,
+      "p95_ms": 0.049,
+      "p99_ms": 0.105,
+      "max_ms": 46.83
+    },
+    "redis_floor_recovery": {
+      "count": 300,
+      "avg_ms": 1.034,
+      "p50_ms": 1.031,
+      "p95_ms": 1.392,
+      "p99_ms": 1.876,
+      "max_ms": 1.992
+    },
+    "unknown": {
+      "count": 0,
+      "avg_ms": null,
+      "p50_ms": null,
+      "p95_ms": null,
+      "p99_ms": null,
+      "max_ms": null
+    }
+  },
+  "mode_order": [
+    "cold_start",
+    "hot_path",
+    "redis_floor_recovery"
+  ],
+  "reasonableness": {
+    "unreasonable": false,
+    "findings": [
+      "三类顺序号分发耗时关系基本符合预期"
+    ]
+  },
+  "top_outliers": {
+    "hot_path": [
+      {
+        "bench_id": "pressure-single-1781604197-single-180-002",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.825565,
+        "partition": 2,
+        "offset": 108,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-141-006",
+        "seq_mode": "hot_path",
+        "duration_ms": 2.00339,
+        "partition": 5,
+        "offset": 224,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-202-025",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.616917,
+        "partition": 2,
+        "offset": 800,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-189-025",
+        "seq_mode": "hot_path",
+        "duration_ms": 2.234867,
+        "partition": 3,
+        "offset": 798,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-262-031",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.80122,
+        "partition": 0,
+        "offset": 986,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-192-033",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.712717,
+        "partition": 8,
+        "offset": 1039,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-281-033",
+        "seq_mode": "hot_path",
+        "duration_ms": 2.071929,
+        "partition": 3,
+        "offset": 1048,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-238-041",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.820434,
+        "partition": 5,
+        "offset": 1283,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-069-097",
+        "seq_mode": "hot_path",
+        "duration_ms": 38.811583,
+        "partition": 1,
+        "offset": 2946,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-223-105",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.658064,
+        "partition": 1,
+        "offset": 3202,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-212-105",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.810006,
+        "partition": 1,
+        "offset": 3201,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-239-105",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.623616,
+        "partition": 1,
+        "offset": 3203,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-177-121",
+        "seq_mode": "hot_path",
+        "duration_ms": 46.830157,
+        "partition": 7,
+        "offset": 3677,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-185-121",
+        "seq_mode": "hot_path",
+        "duration_ms": 46.827507,
+        "partition": 7,
+        "offset": 3678,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-211-121",
+        "seq_mode": "hot_path",
+        "duration_ms": 2.777653,
+        "partition": 6,
+        "offset": 3681,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-114-122",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.655649,
+        "partition": 0,
+        "offset": 3701,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-185-137",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.776149,
+        "partition": 7,
+        "offset": 4158,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-218-137",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.762464,
+        "partition": 5,
+        "offset": 4161,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-193-137",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.697021,
+        "partition": 2,
+        "offset": 4159,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-213-145",
+        "seq_mode": "hot_path",
+        "duration_ms": 1.909309,
+        "partition": 9,
+        "offset": 4401,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      }
+    ],
+    "redis_floor_recovery": [
+      {
+        "bench_id": "pressure-single-1781604197-single-123-000",
+        "seq_mode": "redis_floor_recovery",
+        "duration_ms": 1.992215,
+        "partition": 3,
+        "offset": 42,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      },
+      {
+        "bench_id": "pressure-single-1781604197-single-201-000",
+        "seq_mode": "redis_floor_recovery",
+        "duration_ms": 1.96983,
+        "partition": 7,
+        "offset": 50,
+        "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+      }
+    ]
+  },
+  "raw_mode_counts": {
+    "cold_start": 0,
+    "hot_path": 47700,
+    "redis_floor_recovery": 300,
+    "unknown": 0
+  },
+  "sorted_mode_rows_preview": [
+    {
+      "bench_id": "pressure-single-1781604197-single-251-039",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.012823,
+      "partition": 5,
+      "offset": 1225,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-292-077",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.012974,
+      "partition": 3,
+      "offset": 2369,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-241-039",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013018,
+      "partition": 5,
+      "offset": 1223,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-273-031",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013175,
+      "partition": 6,
+      "offset": 987,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-055-062",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013194,
+      "partition": 5,
+      "offset": 1898,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-257-077",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013254,
+      "partition": 4,
+      "offset": 2362,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-007-152",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013451,
+      "partition": 7,
+      "offset": 4591,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-285-049",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013504,
+      "partition": 8,
+      "offset": 1528,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-084-097",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013633,
+      "partition": 7,
+      "offset": 2954,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-043-062",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013676,
+      "partition": 2,
+      "offset": 1895,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-069-152",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013677,
+      "partition": 1,
+      "offset": 4597,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-001-050",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013685,
+      "partition": 2,
+      "offset": 1530,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-058-152",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.01372,
+      "partition": 6,
+      "offset": 4596,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-099-032",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013808,
+      "partition": 9,
+      "offset": 999,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-160-097",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013873,
+      "partition": 0,
+      "offset": 2954,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-230-039",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013929,
+      "partition": 4,
+      "offset": 1223,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-252-039",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.013995,
+      "partition": 6,
+      "offset": 1225,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-062-011",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014036,
+      "partition": 7,
+      "offset": 366,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-222-077",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014077,
+      "partition": 3,
+      "offset": 2368,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-240-013",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014193,
+      "partition": 0,
+      "offset": 444,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-100-097",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014214,
+      "partition": 5,
+      "offset": 2949,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-293-049",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014246,
+      "partition": 1,
+      "offset": 1529,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-229-039",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014322,
+      "partition": 7,
+      "offset": 1222,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-090-152",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014333,
+      "partition": 6,
+      "offset": 4599,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-271-003",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014352,
+      "partition": 7,
+      "offset": 147,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-218-039",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014387,
+      "partition": 5,
+      "offset": 1224,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-197-001",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014471,
+      "partition": 9,
+      "offset": 79,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-262-003",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014512,
+      "partition": 0,
+      "offset": 146,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-042-032",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014536,
+      "partition": 0,
+      "offset": 994,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-267-031",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014595,
+      "partition": 6,
+      "offset": 986,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-005-001",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014598,
+      "partition": 8,
+      "offset": 60,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-025-005",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014621,
+      "partition": 4,
+      "offset": 182,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-024-003",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014631,
+      "partition": 2,
+      "offset": 122,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-237-018",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014647,
+      "partition": 9,
+      "offset": 593,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-295-006",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014648,
+      "partition": 8,
+      "offset": 239,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-165-097",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014674,
+      "partition": 8,
+      "offset": 2951,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-178-017",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014702,
+      "partition": 1,
+      "offset": 557,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-047-014",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014722,
+      "partition": 8,
+      "offset": 454,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-069-014",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014724,
+      "partition": 1,
+      "offset": 456,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-050-062",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014777,
+      "partition": 7,
+      "offset": 1899,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-123-097",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014789,
+      "partition": 3,
+      "offset": 2954,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-010-152",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014791,
+      "partition": 7,
+      "offset": 4589,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-211-105",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014807,
+      "partition": 6,
+      "offset": 3201,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-015-083",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014813,
+      "partition": 4,
+      "offset": 2521,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-053-014",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014839,
+      "partition": 8,
+      "offset": 455,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-234-057",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014841,
+      "partition": 3,
+      "offset": 1763,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-016-002",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014855,
+      "partition": 2,
+      "offset": 91,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-204-003",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014892,
+      "partition": 3,
+      "offset": 140,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-097-036",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014893,
+      "partition": 8,
+      "offset": 1119,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    },
+    {
+      "bench_id": "pressure-single-1781604197-single-029-005",
+      "seq_mode": "hot_path",
+      "duration_ms": 0.014925,
+      "partition": 8,
+      "offset": 182,
+      "topic": "chat_message_sequence_dispatch_redis_floor_recovery_20260616_180248_sequence_dispatch_benchmark_redis_floor_recovery_attempt1"
+    }
+  ]
+}

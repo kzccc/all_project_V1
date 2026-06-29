@@ -1,0 +1,44 @@
+# Build outputs
+/echo_chat_server
+/echo_chat_seed
+/cmd/echo_chat_server/echo_chat_backend
+/bin/
+/web/chat-server/dist/
+
+# Go / test artifacts
+*.test
+*.out
+coverage.out
+
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Local IDE / workspace files
+.idea/
+.vscode/
+.codex
+
+# Local env and runtime data
+/.echochat-big-disk.env
+/logs/
+/deploy/kafka5/runtime/
+/runtime/
+/tmp/
+/docs/k6_message_test/records
+/docs/k6_message_test/mysql_persist_tuning_records
+/docs/k6_message_test/partition_tuning_records
+/docs/t_K6/records
+/matplotlibrc
+/pressure testing/record/
+logs/
+your log path/
+
+# Uploaded assets / local certs
+/static/avatars/*
+/static/files/*
+/web/chat-server/src/assets/cert/*
+
+# Misc
+*.log
+vendor/

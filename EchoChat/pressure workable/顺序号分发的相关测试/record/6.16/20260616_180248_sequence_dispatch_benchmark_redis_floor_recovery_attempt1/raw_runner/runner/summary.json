@@ -1,0 +1,43 @@
+{
+  "scenario": "single",
+  "mode": "pressure",
+  "run_id": "pressure-single-1781604197",
+  "pair_count": 300,
+  "messages_per_sender": 160,
+  "send_interval_ms": 125,
+  "expected_messages": 48000,
+  "received_messages": 48000,
+  "received_messages_before_drain": 47700,
+  "drain_recovered_messages": 300,
+  "delivery_success_rate": 1.0,
+  "duration_sec": 22.128,
+  "observed_throughput_msg_per_sec": 2169.22,
+  "send_window_start_ms": 1781604200461,
+  "send_window_end_ms": 1781604220460,
+  "send_window_duration_ms": 19999,
+  "latency": {
+    "count": 48000,
+    "avg_ms": 15.795,
+    "p50_ms": 8.0,
+    "p95_ms": 83.0,
+    "p99_ms": 128.0,
+    "max_ms": 165
+  },
+  "drain": {
+    "enabled": true,
+    "max_wait_ms": 5000,
+    "idle_wait_ms": 1000,
+    "pairs_timeout": 0,
+    "pairs_applied": 0
+  },
+  "server_resource_peak": {
+    "samples": 114,
+    "rss_peak_mb": 40.203,
+    "threads_peak": 43,
+    "fd_peak": 7
+  },
+  "started_at_unix": 1781604197,
+  "started_at_ms": 1781604197901,
+  "finished_at_unix": 1781604220,
+  "finished_at_ms": 1781604220484
+}

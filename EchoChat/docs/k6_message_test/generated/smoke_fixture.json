@@ -1,0 +1,96 @@
+{
+  "database": "echochat",
+  "user_prefix": "UK6",
+  "group_prefix": "GK6",
+  "default_password": "123456",
+  "single_pairs": [
+    {
+      "sender_uuid": "UK600000000000000001",
+      "sender_telephone": "17610000001",
+      "sender_nickname": "k6_u0001",
+      "sender_avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
+      "receiver_uuid": "UK600000000000000002",
+      "receiver_telephone": "17610000002",
+      "receiver_nickname": "k6_u0002",
+      "receiver_avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+    },
+    {
+      "sender_uuid": "UK600000000000000003",
+      "sender_telephone": "17610000003",
+      "sender_nickname": "k6_u0003",
+      "sender_avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
+      "receiver_uuid": "UK600000000000000004",
+      "receiver_telephone": "17610000004",
+      "receiver_nickname": "k6_u0004",
+      "receiver_avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+    },
+    {
+      "sender_uuid": "UK600000000000000005",
+      "sender_telephone": "17610000005",
+      "sender_nickname": "k6_u0005",
+      "sender_avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
+      "receiver_uuid": "UK600000000000000006",
+      "receiver_telephone": "17610000006",
+      "receiver_nickname": "k6_u0006",
+      "receiver_avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+    },
+    {
+      "sender_uuid": "UK600000000000000007",
+      "sender_telephone": "17610000007",
+      "sender_nickname": "k6_u0007",
+      "sender_avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
+      "receiver_uuid": "UK600000000000000008",
+      "receiver_telephone": "17610000008",
+      "receiver_nickname": "k6_u0008",
+      "receiver_avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+    },
+    {
+      "sender_uuid": "UK600000000000000009",
+      "sender_telephone": "17610000009",
+      "sender_nickname": "k6_u0009",
+      "sender_avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
+      "receiver_uuid": "UK600000000000000010",
+      "receiver_telephone": "17610000010",
+      "receiver_nickname": "k6_u0010",
+      "receiver_avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+    }
+  ],
+  "group": {
+    "group_id": "GK600000000000000001",
+    "group_name": "k6_group_001",
+    "sender_uuid": "UK600000000000000001",
+    "sender_telephone": "17610000001",
+    "members": [
+      {
+        "uuid": "UK600000000000000001",
+        "telephone": "17610000001",
+        "nickname": "k6_u0001",
+        "avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+      },
+      {
+        "uuid": "UK600000000000000002",
+        "telephone": "17610000002",
+        "nickname": "k6_u0002",
+        "avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+      },
+      {
+        "uuid": "UK600000000000000003",
+        "telephone": "17610000003",
+        "nickname": "k6_u0003",
+        "avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+      },
+      {
+        "uuid": "UK600000000000000004",
+        "telephone": "17610000004",
+        "nickname": "k6_u0004",
+        "avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+      },
+      {
+        "uuid": "UK600000000000000005",
+        "telephone": "17610000005",
+        "nickname": "k6_u0005",
+        "avatar": "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+      }
+    ]
+  }
+}
